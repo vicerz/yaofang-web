@@ -1,0 +1,44 @@
+{
+    "extends": [
+        "stylelint-config-standard-scss"
+    ],
+    "overrides": [
+        {
+            "files": ["**/*.scss"],
+            "customSyntax": "postcss-scss"
+        }
+    ],
+    "rules": {
+        "selector-type-no-unknown": [
+            true,
+            {
+                "ignoreTypes": [
+                    "page",
+                    "font-face",
+                    "viewport",
+                    "counter-style",
+                    "document",
+                    "supports",
+                    "keyframes",
+                    "media",
+                    "import",
+                    "charset",
+                    "swiper"
+                ]
+            }
+        ],
+        "selector-class-pattern": null,
+        "unit-no-unknown": [
+            true,
+            {
+                "ignoreUnits": ["rpx"]
+            }
+        ],
+        "declaration-block-no-duplicate-properties": [
+            true,
+            {
+                "ignore": ["consecutive-duplicates-with-different-values"]
+            }
+        ]
+    }
+}

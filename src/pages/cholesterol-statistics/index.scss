@@ -1,0 +1,22 @@
+.nut-table-main-head {
+    font-size: 12px;
+    font-weight: 400;
+    background: #F5F2EB !important;
+}
+
+.nut-table-main-head-tr-th, .nut-table-main-body-tr-th {
+    padding: 12px 1px !important;
+}
+
+.nut-table-main-body-tr > :nth-child(1) {
+    background: #F5F2EB !important;
+}
+
+.nut-table {
+    border: 1px solid #B29251 !important;
+    border-radius: 10px;
+}
+
+.card-shadow {
+    box-shadow: 0 0 15px rgba($color: #000, $alpha: 30%);
+}

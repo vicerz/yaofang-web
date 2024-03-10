@@ -1,0 +1,12 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.swc
+
+
+# auto-generated files
+.eslintrc-auto-import.json
+auto-imports.d.ts

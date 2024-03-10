@@ -1,0 +1,18 @@
+{
+    "extends": [
+        "taro",
+        "./.eslintrc-auto-import.json"
+    ],
+    "rules": {
+        "indent": ["error", 4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "semi": ["error", "always"],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-no-undef": [2, { "allowGlobals": true }],
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off"
+    }
+}

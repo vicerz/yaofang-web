@@ -1,0 +1,17 @@
+:root {
+    --nutui-uploader-background: #d8d8d8;
+    --nutui-uploader-image-width: 70px;
+    --nutui-uploader-image-height: 70px;
+    --nutui-uploader-preview-margin-right: 0;
+    --nutui-uploader-preview-margin-bottom: 0;
+    --nutui-radiogroup-radio-margin: 0;
+}
+
+.s-form-item-end {
+    align-items: center !important;
+
+    .nut-form-item-body-slots{
+        display: flex;
+        justify-content: flex-end;
+    }
+}

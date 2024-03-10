@@ -1,0 +1,10 @@
+:root {
+    --nutui-cell-background-color: transparent;
+    --nutui-uploader-background: #d8d8d8;
+    --nutui-uploader-image-width: 132px;
+    --nutui-uploader-image-height: 132px;
+}
+
+.nut-cell-extra {
+    flex: unset !important;
+}

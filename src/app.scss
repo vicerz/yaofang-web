@@ -1,0 +1,178 @@
+
+:root {
+    /* Custom Theme */
+    --nut-primary-color: #EC6400;
+    --nutui-primary-color: var(--nut-primary-color);
+    --nutui-primary-color-start: var(--nut-primary-color);
+    --nutui-primary-color-end: #EC6400;
+    --nutui-brand-color: var(--nut-primary-color);
+    --nutui-brand-color-end: var(--nut-primary-color);
+
+    background-color: #F4F4F4;
+
+    /* Form */
+    --nutui-form-item-required-color: #EC6400;
+    --nutui-form-item-error-message-color: #FC0000;
+    --nutui-form-item-error-line-color: #FC0000;
+    --nutui-form-item-label-font-size: 14px;
+    --nutui-form-item-body-slots-text-align: right;
+    --nutui-form-item-body-input-text-align: right;
+    --nutui-form-item-tip-text-align: right;
+
+    .s-form {
+        .s-form-col-item {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nut-form-item-body-tips {
+            text-align: right !important;
+        };
+
+        .nut-form-item {
+            background-color: #F5F6F6;
+            border-radius: 10px !important;
+            margin-bottom: 10px !important;
+            padding: 18px 20px;
+        }
+
+        .nut-input, .nut-textarea {
+            background-color: transparent !important;
+        }
+    }
+
+    .form-layout-left .nut-form-item-label {
+        // padding-left: 0 !important;
+        font-weight: 600;
+    }
+
+    /* Tabs */
+    --nutui-tabs-titles-item-font-size: 32px;
+    --nutui-tabs-titles-background-color: #FFF;
+    --nutui-tabs-titles-item-color: rgb(0 0 0 / 45%);
+    --nutui-tabs-titles-item-active-color: var(--nut-primary-color);
+    --nutui-tabs-horizontal-titles-height: 100px;
+    --nutui-tabs-horizontal-tab-line-color: var(--nut-primary-color);
+    --nutui-tabs-horizontal-titles-item-active-line-width: 28px;
+
+    /* Tag */
+    --nutui-tag-padding: 0 16px;
+
+    /* Grid */
+    --nutui-grid-item-content-padding: 0;
+
+    /* Button */
+    .nut-button--large {
+        --nutui-button-default-font-size: 18px;
+    }
+
+    .nut-tag--close {
+        --nutui-tag-padding: 4px 8px;
+    }
+
+    .nut-icon-close {
+        font-size: 10px !important;
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    .nut-avatar {
+        .nut-image,
+        .nut-img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .nut-tabs {
+        .nut-tabpane {
+            padding: 0;
+            background: transparent;
+        }
+    }
+
+    .nut-swiper {
+        .nut-indicator {
+            &__dot {
+                display: inline-block;
+                vertical-align: middle;
+                width: $indicator-dot-size;
+                height: $indicator-dot-size;
+                border-radius: 50%;
+                background-color: $indicator-dot-color;
+                margin: 0 $indicator-dot-margin;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            &__active {
+                width: $indicator-dot-active-size;
+                border-radius: 50%;
+                background-color: $indicator-color;
+            }
+
+            &__vertical {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .nut-indicator__dot {
+                    margin: 10px 0;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .nut-indicator__active {
+                    width: $indicator-dot-size;
+                    height: $indicator-dot-active-size;
+                }
+            }
+        }
+    }
+
+    .nut-form-item{
+        width: 100%;
+
+        &.flex-col {
+            .nut-form-item__body {
+                width: 100%;
+            }
+        }
+
+        &::before {
+            transform: scaleY(0.5);
+            border-top: var(--nutui-cell-divider-border-bottom, 2px solid #f5f6f7);
+        }
+    }
+
+    .sharp-textarea {
+        background-color: #F4F4F4;
+        margin-top: 12px;
+        border-radius: 8px;
+
+        --nutui-form-item-body-input-text-align: left;
+
+        .nut-textarea__textarea {
+            padding: 16px;
+        }
+    }
+
+    .nut-textarea {
+        .nut-textarea__textarea {
+            height: 100%;
+        }
+    }
+}
