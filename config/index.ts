@@ -1,6 +1,7 @@
 import path from 'path';
 import UnoCSS from 'unocss/webpack';
 import AutoImport from 'unplugin-auto-import/webpack';
+import { defineConfig } from '@tarojs/cli';
 
 const NutUIResolver = () => {
     return (name) => {
@@ -101,12 +102,16 @@ const config = {
         '@/components': path.resolve(__dirname, '..', 'src/components'),
         '@/assets': path.resolve(__dirname, '..', 'src/assets'),
         '@/graphql': path.resolve(__dirname, '..', 'src/graphql'),
+        '@/logto': path.resolve(__dirname, '..', 'src/logto'),
     },
     plugins: [
         '@tarojs/plugin-html',
         '@taro-hooks/plugin-react',
         'tarojs-router-next-plugin',
     ],
+    terser: {
+        enable: false,
+    },
     defineConstants: {
     },
     copy: {
@@ -185,9 +190,10 @@ const config = {
     }
 };
 
-module.exports = function (merge) {
-    if (process.env.NODE_ENV === 'development') {
-        return merge({}, config, require('./dev'));
-    }
-    return merge({}, config, require('./prod'));
-};
+export default defineConfig((merge, { command, mode }) => {
+    return merge({}, config, {
+        env: {
+            NODE_ENV: `"${mode}"`
+        },
+    });
+});

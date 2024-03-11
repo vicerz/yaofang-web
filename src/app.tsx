@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useDidShow, useDidHide } from '@tarojs/taro';
 import 'uno.css';
 
 import UrqlProvider from './urql/provider';
@@ -20,11 +19,11 @@ function App(props) {
     useDidHide(() => { });
 
     return (
-        <LogtoProvider>
-            <UrqlProvider>
+        <UrqlProvider>
+            <LogtoProvider>
                 {props.children}
-            </UrqlProvider>
-        </LogtoProvider>
+            </LogtoProvider>
+        </UrqlProvider>
     );
 }
 

@@ -126,10 +126,6 @@ function Index() {
     };
 
     useDidShow(async () => {
-        if (!isAuthenticated) {
-            Router.toSignIn();
-            return;
-        }
         setUserInfo(await fetchUserInfo());
     });
 
