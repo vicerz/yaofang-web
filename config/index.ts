@@ -110,7 +110,12 @@ const config = {
         'tarojs-router-next-plugin',
     ],
     terser: {
-        enable: false,
+        enable: true,
+        config: {
+            output: {
+                quote_keys: false,
+            },
+        },
     },
     defineConstants: {
     },
