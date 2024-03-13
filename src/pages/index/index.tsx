@@ -130,7 +130,7 @@ function Index() {
     });
 
     return (
-        <>
+        <View className='flex flex-col'>
             <View className='mb-20px'>
                 <NutSwiper autoPlay height={200} defaultValue={0} className='w-full'>
                     {data?.ads?.map((item, index) => (
@@ -209,7 +209,7 @@ function Index() {
                     className='grid grid-cols-2 gap-30px'
                 >
                     <View
-                        className='h-200px rd-20px py-57px px-50px flex flex-col'
+                        className='h-200px rd-20px py-57px px-20px flex flex-col'
                         style={{
                             backgroundImage:`url(${record1bg})`,
                             backgroundSize: 'cover',
@@ -220,11 +220,11 @@ function Index() {
                             Router.toGlucoseRecord();
                         }}
                     >
-                        <TaroText className='text-34px fw-600 c-#116E7F'>血糖记录</TaroText>
-                        <TaroText className='text-24px fw-400 c-#116E7F'>血糖数据记录</TaroText>
+                        <TaroText className='text-34px fw-600 c-#B29251'>血糖记录</TaroText>
+                        <TaroText className='text-20px fw-400 c-#B29251'>建议空腹血糖 3.9～6.1mmol/L</TaroText>
                     </View>
                     <View
-                        className='h-200px rd-20px py-57px px-50px flex flex-col'
+                        className='h-200px rd-20px py-57px px-20px flex flex-col'
                         style={{
                             backgroundImage:`url(${record2bg})`,
                             backgroundSize: 'cover',
@@ -235,8 +235,9 @@ function Index() {
                             Router.toCholesterolRecord();
                         }}
                     >
-                        <TaroText className='text-34px fw-600 c-#B29251'>血压记录</TaroText>
-                        <TaroText className='text-24px fw-400 c-#B29251'>血压数据记录</TaroText>
+                        <TaroText className='text-34px fw-600 c-#116E7F'>血压记录</TaroText>
+                        <TaroText className='text-20px fw-400 c-#116E7F'>建议收缩压 120～139mmHg</TaroText>
+                        <TaroText className='text-20px fw-400 c-#116E7F'>建议舒张压 80～89mmHg</TaroText>
                     </View>
                     <View
                         className='h-200px rd-20px py-57px px-50px flex flex-col'
@@ -270,7 +271,7 @@ function Index() {
                     </View>
                 </View>
             </View>
-        </>
+        </View>
     );
 }
 
