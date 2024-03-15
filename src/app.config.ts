@@ -5,7 +5,7 @@ export default defineAppConfig({
         'pages/mine/index',
         'pages/medical-report-detail/index',
         'pages/medical-report-list/index',
-        'pages/medication-alert/index',
+        'pages/medication-reminder/index',
         'pages/profile/index',
         'pages/glucose-statistics/index',
         'pages/sign-in/index',
@@ -24,7 +24,8 @@ export default defineAppConfig({
         'pages/glucose-standards/index',
         'pages/cholesterol-standards/index',
         'pages/profile/index',
-        'pages/about-us/index'
+        'pages/about-us/index',
+        'pages/medication-reminder-list/index'
     ],
     window: {
         backgroundTextStyle: 'light',

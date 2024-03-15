@@ -1694,9 +1694,11 @@ export type Bigint_Comparison_Exp = {
 export type Check_In_Settings = {
   /** 之后连续签到天数 */
   following: Scalars['numeric']['output'];
+  following_url?: Maybe<Scalars['String']['output']>;
   id: Scalars['uuid']['output'];
   /** 首次连续签到天数 */
   inaugural: Scalars['numeric']['output'];
+  inaugural_url?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregated selection of "check_in_settings" */
@@ -1741,8 +1743,10 @@ export type Check_In_Settings_Bool_Exp = {
   _not?: InputMaybe<Check_In_Settings_Bool_Exp>;
   _or?: InputMaybe<Array<Check_In_Settings_Bool_Exp>>;
   following?: InputMaybe<Numeric_Comparison_Exp>;
+  following_url?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   inaugural?: InputMaybe<Numeric_Comparison_Exp>;
+  inaugural_url?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "check_in_settings" */
@@ -1763,27 +1767,33 @@ export type Check_In_Settings_Inc_Input = {
 export type Check_In_Settings_Insert_Input = {
   /** 之后连续签到天数 */
   following?: InputMaybe<Scalars['numeric']['input']>;
+  following_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   /** 首次连续签到天数 */
   inaugural?: InputMaybe<Scalars['numeric']['input']>;
+  inaugural_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
 export type Check_In_Settings_Max_Fields = {
   /** 之后连续签到天数 */
   following?: Maybe<Scalars['numeric']['output']>;
+  following_url?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   /** 首次连续签到天数 */
   inaugural?: Maybe<Scalars['numeric']['output']>;
+  inaugural_url?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
 export type Check_In_Settings_Min_Fields = {
   /** 之后连续签到天数 */
   following?: Maybe<Scalars['numeric']['output']>;
+  following_url?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   /** 首次连续签到天数 */
   inaugural?: Maybe<Scalars['numeric']['output']>;
+  inaugural_url?: Maybe<Scalars['String']['output']>;
 };
 
 /** response of any mutation on the table "check_in_settings" */
@@ -1804,8 +1814,10 @@ export type Check_In_Settings_On_Conflict = {
 /** Ordering options when selecting data from "check_in_settings". */
 export type Check_In_Settings_Order_By = {
   following?: InputMaybe<Order_By>;
+  following_url?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   inaugural?: InputMaybe<Order_By>;
+  inaugural_url?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: check_in_settings */
@@ -1818,18 +1830,24 @@ export enum Check_In_Settings_Select_Column {
   /** column name */
   Following = 'following',
   /** column name */
+  FollowingUrl = 'following_url',
+  /** column name */
   Id = 'id',
   /** column name */
-  Inaugural = 'inaugural'
+  Inaugural = 'inaugural',
+  /** column name */
+  InauguralUrl = 'inaugural_url'
 }
 
 /** input type for updating data in table "check_in_settings" */
 export type Check_In_Settings_Set_Input = {
   /** 之后连续签到天数 */
   following?: InputMaybe<Scalars['numeric']['input']>;
+  following_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   /** 首次连续签到天数 */
   inaugural?: InputMaybe<Scalars['numeric']['input']>;
+  inaugural_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate stddev on columns */
@@ -1868,9 +1886,11 @@ export type Check_In_Settings_Stream_Cursor_Input = {
 export type Check_In_Settings_Stream_Cursor_Value_Input = {
   /** 之后连续签到天数 */
   following?: InputMaybe<Scalars['numeric']['input']>;
+  following_url?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   /** 首次连续签到天数 */
   inaugural?: InputMaybe<Scalars['numeric']['input']>;
+  inaugural_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate sum on columns */
@@ -1886,9 +1906,13 @@ export enum Check_In_Settings_Update_Column {
   /** column name */
   Following = 'following',
   /** column name */
+  FollowingUrl = 'following_url',
+  /** column name */
   Id = 'id',
   /** column name */
-  Inaugural = 'inaugural'
+  Inaugural = 'inaugural',
+  /** column name */
+  InauguralUrl = 'inaugural_url'
 }
 
 export type Check_In_Settings_Updates = {
@@ -5611,6 +5635,306 @@ export type Medical_Examination_Records_Updates = {
   where: Medical_Examination_Records_Bool_Exp;
 };
 
+/** 用药提醒 */
+export type Medication_Reminders = {
+  created_at: Scalars['timestamptz']['output'];
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['uuid']['output'];
+  /** 生产厂家 */
+  manufacturer: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  /** 提醒时间数组 */
+  reminder_times: Array<Scalars['String']['output']>;
+  spec: Scalars['String']['output'];
+  /** 用法用量 */
+  usage_dosage: Scalars['String']['output'];
+  user_id: Scalars['String']['output'];
+};
+
+/** aggregated selection of "medication_reminders" */
+export type Medication_Reminders_Aggregate = {
+  aggregate?: Maybe<Medication_Reminders_Aggregate_Fields>;
+  nodes: Array<Medication_Reminders>;
+};
+
+/** aggregate fields of "medication_reminders" */
+export type Medication_Reminders_Aggregate_Fields = {
+  avg?: Maybe<Medication_Reminders_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Medication_Reminders_Max_Fields>;
+  min?: Maybe<Medication_Reminders_Min_Fields>;
+  stddev?: Maybe<Medication_Reminders_Stddev_Fields>;
+  stddev_pop?: Maybe<Medication_Reminders_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Medication_Reminders_Stddev_Samp_Fields>;
+  sum?: Maybe<Medication_Reminders_Sum_Fields>;
+  var_pop?: Maybe<Medication_Reminders_Var_Pop_Fields>;
+  var_samp?: Maybe<Medication_Reminders_Var_Samp_Fields>;
+  variance?: Maybe<Medication_Reminders_Variance_Fields>;
+};
+
+
+/** aggregate fields of "medication_reminders" */
+export type Medication_Reminders_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Medication_Reminders_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Medication_Reminders_Avg_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "medication_reminders". All fields are combined with a logical 'AND'. */
+export type Medication_Reminders_Bool_Exp = {
+  _and?: InputMaybe<Array<Medication_Reminders_Bool_Exp>>;
+  _not?: InputMaybe<Medication_Reminders_Bool_Exp>;
+  _or?: InputMaybe<Array<Medication_Reminders_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  doses_per_day?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  manufacturer?: InputMaybe<String_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  reminder_times?: InputMaybe<String_Array_Comparison_Exp>;
+  spec?: InputMaybe<String_Comparison_Exp>;
+  usage_dosage?: InputMaybe<String_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "medication_reminders" */
+export enum Medication_Reminders_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  MedicationRemindersPkey = 'medication_reminders_pkey'
+}
+
+/** input type for incrementing numeric columns in table "medication_reminders" */
+export type Medication_Reminders_Inc_Input = {
+  /** 每天用药次数 */
+  doses_per_day?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "medication_reminders" */
+export type Medication_Reminders_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 每天用药次数 */
+  doses_per_day?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 生产厂家 */
+  manufacturer?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** 提醒时间数组 */
+  reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
+  spec?: InputMaybe<Scalars['String']['input']>;
+  /** 用法用量 */
+  usage_dosage?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Medication_Reminders_Max_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  /** 生产厂家 */
+  manufacturer?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  /** 提醒时间数组 */
+  reminder_times?: Maybe<Array<Scalars['String']['output']>>;
+  spec?: Maybe<Scalars['String']['output']>;
+  /** 用法用量 */
+  usage_dosage?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Medication_Reminders_Min_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  /** 生产厂家 */
+  manufacturer?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  /** 提醒时间数组 */
+  reminder_times?: Maybe<Array<Scalars['String']['output']>>;
+  spec?: Maybe<Scalars['String']['output']>;
+  /** 用法用量 */
+  usage_dosage?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "medication_reminders" */
+export type Medication_Reminders_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Medication_Reminders>;
+};
+
+/** on_conflict condition type for table "medication_reminders" */
+export type Medication_Reminders_On_Conflict = {
+  constraint: Medication_Reminders_Constraint;
+  update_columns?: Array<Medication_Reminders_Update_Column>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "medication_reminders". */
+export type Medication_Reminders_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  doses_per_day?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  manufacturer?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  reminder_times?: InputMaybe<Order_By>;
+  spec?: InputMaybe<Order_By>;
+  usage_dosage?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: medication_reminders */
+export type Medication_Reminders_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
+};
+
+/** select columns of table "medication_reminders" */
+export enum Medication_Reminders_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DosesPerDay = 'doses_per_day',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Manufacturer = 'manufacturer',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  ReminderTimes = 'reminder_times',
+  /** column name */
+  Spec = 'spec',
+  /** column name */
+  UsageDosage = 'usage_dosage',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "medication_reminders" */
+export type Medication_Reminders_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 每天用药次数 */
+  doses_per_day?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 生产厂家 */
+  manufacturer?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** 提醒时间数组 */
+  reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
+  spec?: InputMaybe<Scalars['String']['input']>;
+  /** 用法用量 */
+  usage_dosage?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Medication_Reminders_Stddev_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Medication_Reminders_Stddev_Pop_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Medication_Reminders_Stddev_Samp_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "medication_reminders" */
+export type Medication_Reminders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Medication_Reminders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Medication_Reminders_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 每天用药次数 */
+  doses_per_day?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 生产厂家 */
+  manufacturer?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** 提醒时间数组 */
+  reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
+  spec?: InputMaybe<Scalars['String']['input']>;
+  /** 用法用量 */
+  usage_dosage?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Medication_Reminders_Sum_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "medication_reminders" */
+export enum Medication_Reminders_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DosesPerDay = 'doses_per_day',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Manufacturer = 'manufacturer',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  ReminderTimes = 'reminder_times',
+  /** column name */
+  Spec = 'spec',
+  /** column name */
+  UsageDosage = 'usage_dosage',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Medication_Reminders_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Medication_Reminders_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Medication_Reminders_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Medication_Reminders_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Medication_Reminders_Var_Pop_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Medication_Reminders_Var_Samp_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Medication_Reminders_Variance_Fields = {
+  /** 每天用药次数 */
+  doses_per_day?: Maybe<Scalars['Float']['output']>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   /** This API call returns a new API key. The new key does not have any permissions. Requires permission API_MOD */
@@ -5713,6 +6037,10 @@ export type Mutation_Root = {
   delete_medical_examination_records?: Maybe<Medical_Examination_Records_Mutation_Response>;
   /** delete single row from the table: "medical_examination_records" */
   delete_medical_examination_records_by_pk?: Maybe<Medical_Examination_Records>;
+  /** delete data from the table: "medication_reminders" */
+  delete_medication_reminders?: Maybe<Medication_Reminders_Mutation_Response>;
+  /** delete single row from the table: "medication_reminders" */
+  delete_medication_reminders_by_pk?: Maybe<Medication_Reminders>;
   /** delete data from the table: "oidc_model_instances" */
   delete_oidc_model_instances?: Maybe<Oidc_Model_Instances_Mutation_Response>;
   /** delete single row from the table: "oidc_model_instances" */
@@ -5917,6 +6245,10 @@ export type Mutation_Root = {
   insert_medical_examination_records?: Maybe<Medical_Examination_Records_Mutation_Response>;
   /** insert a single row into the table: "medical_examination_records" */
   insert_medical_examination_records_one?: Maybe<Medical_Examination_Records>;
+  /** insert data into the table: "medication_reminders" */
+  insert_medication_reminders?: Maybe<Medication_Reminders_Mutation_Response>;
+  /** insert a single row into the table: "medication_reminders" */
+  insert_medication_reminders_one?: Maybe<Medication_Reminders>;
   /** insert data into the table: "oidc_model_instances" */
   insert_oidc_model_instances?: Maybe<Oidc_Model_Instances_Mutation_Response>;
   /** insert a single row into the table: "oidc_model_instances" */
@@ -6171,6 +6503,12 @@ export type Mutation_Root = {
   update_medical_examination_records_by_pk?: Maybe<Medical_Examination_Records>;
   /** update multiples rows of table: "medical_examination_records" */
   update_medical_examination_records_many?: Maybe<Array<Maybe<Medical_Examination_Records_Mutation_Response>>>;
+  /** update data of the table: "medication_reminders" */
+  update_medication_reminders?: Maybe<Medication_Reminders_Mutation_Response>;
+  /** update single row of the table: "medication_reminders" */
+  update_medication_reminders_by_pk?: Maybe<Medication_Reminders>;
+  /** update multiples rows of table: "medication_reminders" */
+  update_medication_reminders_many?: Maybe<Array<Maybe<Medication_Reminders_Mutation_Response>>>;
   /** update data of the table: "oidc_model_instances" */
   update_oidc_model_instances?: Maybe<Oidc_Model_Instances_Mutation_Response>;
   /** update single row of the table: "oidc_model_instances" */
@@ -6634,6 +6972,18 @@ export type Mutation_RootDelete_Medical_Examination_RecordsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Medical_Examination_Records_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Medication_RemindersArgs = {
+  where: Medication_Reminders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Medication_Reminders_By_PkArgs = {
   id: Scalars['uuid']['input'];
 };
 
@@ -7306,6 +7656,20 @@ export type Mutation_RootInsert_Medical_Examination_RecordsArgs = {
 export type Mutation_RootInsert_Medical_Examination_Records_OneArgs = {
   object: Medical_Examination_Records_Insert_Input;
   on_conflict?: InputMaybe<Medical_Examination_Records_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Medication_RemindersArgs = {
+  objects: Array<Medication_Reminders_Insert_Input>;
+  on_conflict?: InputMaybe<Medication_Reminders_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Medication_Reminders_OneArgs = {
+  object: Medication_Reminders_Insert_Input;
+  on_conflict?: InputMaybe<Medication_Reminders_On_Conflict>;
 };
 
 
@@ -8282,6 +8646,28 @@ export type Mutation_RootUpdate_Medical_Examination_Records_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Medical_Examination_Records_ManyArgs = {
   updates: Array<Medical_Examination_Records_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Medication_RemindersArgs = {
+  _inc?: InputMaybe<Medication_Reminders_Inc_Input>;
+  _set?: InputMaybe<Medication_Reminders_Set_Input>;
+  where: Medication_Reminders_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Medication_Reminders_By_PkArgs = {
+  _inc?: InputMaybe<Medication_Reminders_Inc_Input>;
+  _set?: InputMaybe<Medication_Reminders_Set_Input>;
+  pk_columns: Medication_Reminders_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Medication_Reminders_ManyArgs = {
+  updates: Array<Medication_Reminders_Updates>;
 };
 
 
@@ -11940,6 +12326,12 @@ export type Query_Root = {
   medical_examination_records_aggregate: Medical_Examination_Records_Aggregate;
   /** fetch data from the table: "medical_examination_records" using primary key columns */
   medical_examination_records_by_pk?: Maybe<Medical_Examination_Records>;
+  /** fetch data from the table: "medication_reminders" */
+  medication_reminders: Array<Medication_Reminders>;
+  /** fetch aggregated fields from the table: "medication_reminders" */
+  medication_reminders_aggregate: Medication_Reminders_Aggregate;
+  /** fetch data from the table: "medication_reminders" using primary key columns */
+  medication_reminders_by_pk?: Maybe<Medication_Reminders>;
   /** fetch data from the table: "oidc_model_instances" */
   oidc_model_instances: Array<Oidc_Model_Instances>;
   /** fetch aggregated fields from the table: "oidc_model_instances" */
@@ -12667,6 +13059,29 @@ export type Query_RootMedical_Examination_Records_AggregateArgs = {
 
 
 export type Query_RootMedical_Examination_Records_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootMedication_RemindersArgs = {
+  distinct_on?: InputMaybe<Array<Medication_Reminders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Medication_Reminders_Order_By>>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
+};
+
+
+export type Query_RootMedication_Reminders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Medication_Reminders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Medication_Reminders_Order_By>>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
+};
+
+
+export type Query_RootMedication_Reminders_By_PkArgs = {
   id: Scalars['uuid']['input'];
 };
 
@@ -15469,6 +15884,14 @@ export type Subscription_Root = {
   medical_examination_records_by_pk?: Maybe<Medical_Examination_Records>;
   /** fetch data from the table in a streaming manner: "medical_examination_records" */
   medical_examination_records_stream: Array<Medical_Examination_Records>;
+  /** fetch data from the table: "medication_reminders" */
+  medication_reminders: Array<Medication_Reminders>;
+  /** fetch aggregated fields from the table: "medication_reminders" */
+  medication_reminders_aggregate: Medication_Reminders_Aggregate;
+  /** fetch data from the table: "medication_reminders" using primary key columns */
+  medication_reminders_by_pk?: Maybe<Medication_Reminders>;
+  /** fetch data from the table in a streaming manner: "medication_reminders" */
+  medication_reminders_stream: Array<Medication_Reminders>;
   /** fetch data from the table: "oidc_model_instances" */
   oidc_model_instances: Array<Oidc_Model_Instances>;
   /** fetch aggregated fields from the table: "oidc_model_instances" */
@@ -16423,6 +16846,36 @@ export type Subscription_RootMedical_Examination_Records_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Medical_Examination_Records_Stream_Cursor_Input>>;
   where?: InputMaybe<Medical_Examination_Records_Bool_Exp>;
+};
+
+
+export type Subscription_RootMedication_RemindersArgs = {
+  distinct_on?: InputMaybe<Array<Medication_Reminders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Medication_Reminders_Order_By>>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
+};
+
+
+export type Subscription_RootMedication_Reminders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Medication_Reminders_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Medication_Reminders_Order_By>>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
+};
+
+
+export type Subscription_RootMedication_Reminders_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootMedication_Reminders_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Medication_Reminders_Stream_Cursor_Input>>;
+  where?: InputMaybe<Medication_Reminders_Bool_Exp>;
 };
 
 
@@ -19428,6 +19881,25 @@ export type UpdateMedicalReportRecordOneMutationMutationVariables = Exact<{
 
 export type UpdateMedicalReportRecordOneMutationMutation = { update_medical_examination_records_by_pk?: { id: any } | null };
 
+export type MedicationReminderListQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MedicationReminderListQueryQuery = { medication_reminders: Array<{ id: any, name: string, usage_dosage: string }> };
+
+export type InsertMedicationReminderMutationMutationVariables = Exact<{
+  object: Medication_Reminders_Insert_Input;
+}>;
+
+
+export type InsertMedicationReminderMutationMutation = { insert_medication_reminders_one?: { id: any } | null };
+
+export type DeleteMedicationReminderMutationMutationVariables = Exact<{
+  id: Scalars['uuid']['input'];
+}>;
+
+
+export type DeleteMedicationReminderMutationMutation = { delete_medication_reminders_by_pk?: { id: any } | null };
+
 export type UpdateUserInfoMutationMutationVariables = Exact<{
   id: Scalars['String']['input'];
   object: Users_Set_Input;
@@ -19474,4 +19946,7 @@ export const MedicalReportListQueryDocument = {"kind":"Document","definitions":[
 export const MedicalReportRecordDetailQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MedicalReportRecordDetailQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"medical_examination_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"exam_date"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}}]}}]}}]} as unknown as DocumentNode<MedicalReportRecordDetailQueryQuery, MedicalReportRecordDetailQueryQueryVariables>;
 export const InsertMedicalReportRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertMedicalReportRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medical_examination_records_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_medical_examination_records_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertMedicalReportRecordOneMutationMutation, InsertMedicalReportRecordOneMutationMutationVariables>;
 export const UpdateMedicalReportRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateMedicalReportRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medical_examination_records_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_medical_examination_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateMedicalReportRecordOneMutationMutation, UpdateMedicalReportRecordOneMutationMutationVariables>;
+export const MedicationReminderListQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MedicationReminderListQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"medication_reminders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"usage_dosage"}}]}}]}}]} as unknown as DocumentNode<MedicationReminderListQueryQuery, MedicationReminderListQueryQueryVariables>;
+export const InsertMedicationReminderMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertMedicationReminderMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medication_reminders_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_medication_reminders_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertMedicationReminderMutationMutation, InsertMedicationReminderMutationMutationVariables>;
+export const DeleteMedicationReminderMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMedicationReminderMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_medication_reminders_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteMedicationReminderMutationMutation, DeleteMedicationReminderMutationMutationVariables>;
 export const UpdateUserInfoMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUserInfoMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_users_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserInfoMutationMutation, UpdateUserInfoMutationMutationVariables>;

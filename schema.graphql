@@ -2005,10 +2005,12 @@ input bigint_comparison_exp {
 type check_in_settings {
   """之后连续签到天数"""
   following: numeric!
+  following_url: String
   id: uuid!
 
   """首次连续签到天数"""
   inaugural: numeric!
+  inaugural_url: String
 }
 
 """
@@ -2053,8 +2055,10 @@ input check_in_settings_bool_exp {
   _not: check_in_settings_bool_exp
   _or: [check_in_settings_bool_exp!]
   following: numeric_comparison_exp
+  following_url: String_comparison_exp
   id: uuid_comparison_exp
   inaugural: numeric_comparison_exp
+  inaugural_url: String_comparison_exp
 }
 
 """
@@ -2084,30 +2088,36 @@ input type for inserting data into table "check_in_settings"
 input check_in_settings_insert_input {
   """之后连续签到天数"""
   following: numeric
+  following_url: String
   id: uuid
 
   """首次连续签到天数"""
   inaugural: numeric
+  inaugural_url: String
 }
 
 """aggregate max on columns"""
 type check_in_settings_max_fields {
   """之后连续签到天数"""
   following: numeric
+  following_url: String
   id: uuid
 
   """首次连续签到天数"""
   inaugural: numeric
+  inaugural_url: String
 }
 
 """aggregate min on columns"""
 type check_in_settings_min_fields {
   """之后连续签到天数"""
   following: numeric
+  following_url: String
   id: uuid
 
   """首次连续签到天数"""
   inaugural: numeric
+  inaugural_url: String
 }
 
 """
@@ -2133,8 +2143,10 @@ input check_in_settings_on_conflict {
 """Ordering options when selecting data from "check_in_settings"."""
 input check_in_settings_order_by {
   following: order_by
+  following_url: order_by
   id: order_by
   inaugural: order_by
+  inaugural_url: order_by
 }
 
 """primary key columns input for table: check_in_settings"""
@@ -2150,10 +2162,16 @@ enum check_in_settings_select_column {
   following
 
   """column name"""
+  following_url
+
+  """column name"""
   id
 
   """column name"""
   inaugural
+
+  """column name"""
+  inaugural_url
 }
 
 """
@@ -2162,10 +2180,12 @@ input type for updating data in table "check_in_settings"
 input check_in_settings_set_input {
   """之后连续签到天数"""
   following: numeric
+  following_url: String
   id: uuid
 
   """首次连续签到天数"""
   inaugural: numeric
+  inaugural_url: String
 }
 
 """aggregate stddev on columns"""
@@ -2210,10 +2230,12 @@ input check_in_settings_stream_cursor_input {
 input check_in_settings_stream_cursor_value_input {
   """之后连续签到天数"""
   following: numeric
+  following_url: String
   id: uuid
 
   """首次连续签到天数"""
   inaugural: numeric
+  inaugural_url: String
 }
 
 """aggregate sum on columns"""
@@ -2233,10 +2255,16 @@ enum check_in_settings_update_column {
   following
 
   """column name"""
+  following_url
+
+  """column name"""
   id
 
   """column name"""
   inaugural
+
+  """column name"""
+  inaugural_url
 }
 
 input check_in_settings_updates {
@@ -6715,6 +6743,369 @@ input medical_examination_records_updates {
   where: medical_examination_records_bool_exp!
 }
 
+"""用药提醒"""
+type medication_reminders {
+  created_at: timestamptz!
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid!
+
+  """生产厂家"""
+  manufacturer: String!
+  name: String!
+
+  """提醒时间数组"""
+  reminder_times: [String!]!
+  spec: String!
+
+  """用法用量"""
+  usage_dosage: String!
+  user_id: String!
+}
+
+"""
+aggregated selection of "medication_reminders"
+"""
+type medication_reminders_aggregate {
+  aggregate: medication_reminders_aggregate_fields
+  nodes: [medication_reminders!]!
+}
+
+"""
+aggregate fields of "medication_reminders"
+"""
+type medication_reminders_aggregate_fields {
+  avg: medication_reminders_avg_fields
+  count(columns: [medication_reminders_select_column!], distinct: Boolean): Int!
+  max: medication_reminders_max_fields
+  min: medication_reminders_min_fields
+  stddev: medication_reminders_stddev_fields
+  stddev_pop: medication_reminders_stddev_pop_fields
+  stddev_samp: medication_reminders_stddev_samp_fields
+  sum: medication_reminders_sum_fields
+  var_pop: medication_reminders_var_pop_fields
+  var_samp: medication_reminders_var_samp_fields
+  variance: medication_reminders_variance_fields
+}
+
+"""aggregate avg on columns"""
+type medication_reminders_avg_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""
+Boolean expression to filter rows from the table "medication_reminders". All fields are combined with a logical 'AND'.
+"""
+input medication_reminders_bool_exp {
+  _and: [medication_reminders_bool_exp!]
+  _not: medication_reminders_bool_exp
+  _or: [medication_reminders_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  doses_per_day: Int_comparison_exp
+  id: uuid_comparison_exp
+  manufacturer: String_comparison_exp
+  name: String_comparison_exp
+  reminder_times: String_array_comparison_exp
+  spec: String_comparison_exp
+  usage_dosage: String_comparison_exp
+  user_id: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "medication_reminders"
+"""
+enum medication_reminders_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  medication_reminders_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "medication_reminders"
+"""
+input medication_reminders_inc_input {
+  """每天用药次数"""
+  doses_per_day: Int
+}
+
+"""
+input type for inserting data into table "medication_reminders"
+"""
+input medication_reminders_insert_input {
+  created_at: timestamptz
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid
+
+  """生产厂家"""
+  manufacturer: String
+  name: String
+
+  """提醒时间数组"""
+  reminder_times: [String!]
+  spec: String
+
+  """用法用量"""
+  usage_dosage: String
+  user_id: String
+}
+
+"""aggregate max on columns"""
+type medication_reminders_max_fields {
+  created_at: timestamptz
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid
+
+  """生产厂家"""
+  manufacturer: String
+  name: String
+
+  """提醒时间数组"""
+  reminder_times: [String!]
+  spec: String
+
+  """用法用量"""
+  usage_dosage: String
+  user_id: String
+}
+
+"""aggregate min on columns"""
+type medication_reminders_min_fields {
+  created_at: timestamptz
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid
+
+  """生产厂家"""
+  manufacturer: String
+  name: String
+
+  """提醒时间数组"""
+  reminder_times: [String!]
+  spec: String
+
+  """用法用量"""
+  usage_dosage: String
+  user_id: String
+}
+
+"""
+response of any mutation on the table "medication_reminders"
+"""
+type medication_reminders_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [medication_reminders!]!
+}
+
+"""
+on_conflict condition type for table "medication_reminders"
+"""
+input medication_reminders_on_conflict {
+  constraint: medication_reminders_constraint!
+  update_columns: [medication_reminders_update_column!]! = []
+  where: medication_reminders_bool_exp
+}
+
+"""Ordering options when selecting data from "medication_reminders"."""
+input medication_reminders_order_by {
+  created_at: order_by
+  doses_per_day: order_by
+  id: order_by
+  manufacturer: order_by
+  name: order_by
+  reminder_times: order_by
+  spec: order_by
+  usage_dosage: order_by
+  user_id: order_by
+}
+
+"""primary key columns input for table: medication_reminders"""
+input medication_reminders_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "medication_reminders"
+"""
+enum medication_reminders_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  doses_per_day
+
+  """column name"""
+  id
+
+  """column name"""
+  manufacturer
+
+  """column name"""
+  name
+
+  """column name"""
+  reminder_times
+
+  """column name"""
+  spec
+
+  """column name"""
+  usage_dosage
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "medication_reminders"
+"""
+input medication_reminders_set_input {
+  created_at: timestamptz
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid
+
+  """生产厂家"""
+  manufacturer: String
+  name: String
+
+  """提醒时间数组"""
+  reminder_times: [String!]
+  spec: String
+
+  """用法用量"""
+  usage_dosage: String
+  user_id: String
+}
+
+"""aggregate stddev on columns"""
+type medication_reminders_stddev_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type medication_reminders_stddev_pop_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type medication_reminders_stddev_samp_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""
+Streaming cursor of the table "medication_reminders"
+"""
+input medication_reminders_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: medication_reminders_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input medication_reminders_stream_cursor_value_input {
+  created_at: timestamptz
+
+  """每天用药次数"""
+  doses_per_day: Int
+  id: uuid
+
+  """生产厂家"""
+  manufacturer: String
+  name: String
+
+  """提醒时间数组"""
+  reminder_times: [String!]
+  spec: String
+
+  """用法用量"""
+  usage_dosage: String
+  user_id: String
+}
+
+"""aggregate sum on columns"""
+type medication_reminders_sum_fields {
+  """每天用药次数"""
+  doses_per_day: Int
+}
+
+"""
+update columns of table "medication_reminders"
+"""
+enum medication_reminders_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  doses_per_day
+
+  """column name"""
+  id
+
+  """column name"""
+  manufacturer
+
+  """column name"""
+  name
+
+  """column name"""
+  reminder_times
+
+  """column name"""
+  spec
+
+  """column name"""
+  usage_dosage
+
+  """column name"""
+  user_id
+}
+
+input medication_reminders_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: medication_reminders_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: medication_reminders_set_input
+
+  """filter the rows which have to be updated"""
+  where: medication_reminders_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type medication_reminders_var_pop_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""aggregate var_samp on columns"""
+type medication_reminders_var_samp_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
+"""aggregate variance on columns"""
+type medication_reminders_variance_fields {
+  """每天用药次数"""
+  doses_per_day: Float
+}
+
 """mutation root"""
 type mutation_root {
   """
@@ -7038,6 +7429,19 @@ type mutation_root {
   delete single row from the table: "medical_examination_records"
   """
   delete_medical_examination_records_by_pk(id: uuid!): medical_examination_records
+
+  """
+  delete data from the table: "medication_reminders"
+  """
+  delete_medication_reminders(
+    """filter the rows which have to be deleted"""
+    where: medication_reminders_bool_exp!
+  ): medication_reminders_mutation_response
+
+  """
+  delete single row from the table: "medication_reminders"
+  """
+  delete_medication_reminders_by_pk(id: uuid!): medication_reminders
 
   """
   delete data from the table: "oidc_model_instances"
@@ -7914,6 +8318,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: medical_examination_records_on_conflict
   ): medical_examination_records
+
+  """
+  insert data into the table: "medication_reminders"
+  """
+  insert_medication_reminders(
+    """the rows to be inserted"""
+    objects: [medication_reminders_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: medication_reminders_on_conflict
+  ): medication_reminders_mutation_response
+
+  """
+  insert a single row into the table: "medication_reminders"
+  """
+  insert_medication_reminders_one(
+    """the row to be inserted"""
+    object: medication_reminders_insert_input!
+
+    """upsert condition"""
+    on_conflict: medication_reminders_on_conflict
+  ): medication_reminders
 
   """
   insert data into the table: "oidc_model_instances"
@@ -9603,6 +10029,40 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [medical_examination_records_updates!]!
   ): [medical_examination_records_mutation_response]
+
+  """
+  update data of the table: "medication_reminders"
+  """
+  update_medication_reminders(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: medication_reminders_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: medication_reminders_set_input
+
+    """filter the rows which have to be updated"""
+    where: medication_reminders_bool_exp!
+  ): medication_reminders_mutation_response
+
+  """
+  update single row of the table: "medication_reminders"
+  """
+  update_medication_reminders_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: medication_reminders_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: medication_reminders_set_input
+    pk_columns: medication_reminders_pk_columns_input!
+  ): medication_reminders
+
+  """
+  update multiples rows of table: "medication_reminders"
+  """
+  update_medication_reminders_many(
+    """updates to execute, in order"""
+    updates: [medication_reminders_updates!]!
+  ): [medication_reminders_mutation_response]
 
   """
   update data of the table: "oidc_model_instances"
@@ -15087,6 +15547,51 @@ type query_root {
   medical_examination_records_by_pk(id: uuid!): medical_examination_records
 
   """
+  fetch data from the table: "medication_reminders"
+  """
+  medication_reminders(
+    """distinct select on columns"""
+    distinct_on: [medication_reminders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [medication_reminders_order_by!]
+
+    """filter the rows returned"""
+    where: medication_reminders_bool_exp
+  ): [medication_reminders!]!
+
+  """
+  fetch aggregated fields from the table: "medication_reminders"
+  """
+  medication_reminders_aggregate(
+    """distinct select on columns"""
+    distinct_on: [medication_reminders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [medication_reminders_order_by!]
+
+    """filter the rows returned"""
+    where: medication_reminders_bool_exp
+  ): medication_reminders_aggregate!
+
+  """
+  fetch data from the table: "medication_reminders" using primary key columns
+  """
+  medication_reminders_by_pk(id: uuid!): medication_reminders
+
+  """
   fetch data from the table: "oidc_model_instances"
   """
   oidc_model_instances(
@@ -20041,6 +20546,65 @@ type subscription_root {
     """filter the rows returned"""
     where: medical_examination_records_bool_exp
   ): [medical_examination_records!]!
+
+  """
+  fetch data from the table: "medication_reminders"
+  """
+  medication_reminders(
+    """distinct select on columns"""
+    distinct_on: [medication_reminders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [medication_reminders_order_by!]
+
+    """filter the rows returned"""
+    where: medication_reminders_bool_exp
+  ): [medication_reminders!]!
+
+  """
+  fetch aggregated fields from the table: "medication_reminders"
+  """
+  medication_reminders_aggregate(
+    """distinct select on columns"""
+    distinct_on: [medication_reminders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [medication_reminders_order_by!]
+
+    """filter the rows returned"""
+    where: medication_reminders_bool_exp
+  ): medication_reminders_aggregate!
+
+  """
+  fetch data from the table: "medication_reminders" using primary key columns
+  """
+  medication_reminders_by_pk(id: uuid!): medication_reminders
+
+  """
+  fetch data from the table in a streaming manner: "medication_reminders"
+  """
+  medication_reminders_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [medication_reminders_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: medication_reminders_bool_exp
+  ): [medication_reminders!]!
 
   """
   fetch data from the table: "oidc_model_instances"

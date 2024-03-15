@@ -10,7 +10,7 @@ function Index() {
         {
             icon: 'alert',
             text: '用药提醒',
-            url: '/pages/medication-alert/index',
+            url: '/pages/medication-reminder-list/index',
         },
         {
             icon: 'profile',
