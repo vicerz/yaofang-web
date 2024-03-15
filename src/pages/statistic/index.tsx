@@ -37,6 +37,7 @@ function Index() {
                 style={{
                     backgroundImage: `url(${statisticBg3})`,
                 }}
+                onClick={() => Router.toLabReportList()}
             >
                 <View className='absolute top-60px left-115px flex flex-col gap-10px'>
                     <TaroText className='text-34px fw-600 text-white'>化验报告管理</TaroText>
@@ -48,6 +49,7 @@ function Index() {
                 style={{
                     backgroundImage: `url(${statisticBg4})`,
                 }}
+                onClick={() => Router.toMedicalReportList()}
             >
                 <View className='absolute top-60px left-115px flex flex-col gap-10px'>
                     <TaroText className='text-34px fw-600 text-white'>体检报告管理</TaroText>

@@ -11,7 +11,7 @@ export default defineAppConfig({
         'pages/sign-in/index',
         'pages/callback/index',
         'pages/glucose-record/index',
-        '/pages/glucose-record-detail/index',
+        'pages/glucose-record-detail/index',
         'pages/cholesterol-record/index',
         'pages/cholesterol-record-detail/index',
         'pages/lab-report-record/index',

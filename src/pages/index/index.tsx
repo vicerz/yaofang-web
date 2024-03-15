@@ -38,15 +38,16 @@ const CheckInMutationDocument = graphql(`
 `);
 
 function Index() {
-    const { fetchUserInfo, isAuthenticated } = useLogto();
+    const { fetchUserInfo } = useLogto();
 
     const [userInfo, setUserInfo] = useState<UserInfoResponse>();
 
-    const [{ data }] = useQuery({
+    const [{ data }, fetch] = useQuery({
         query: IndexPageQueryDocument,
+        requestPolicy: 'network-only',
     });
 
-    const [{}, checkIn] = useMutation(CheckInMutationDocument);
+    const [{ data: checkInData }, checkIn] = useMutation(CheckInMutationDocument);
 
     const handleCheckIn = async () => {
         const newSignInDate = new Date();
@@ -69,13 +70,19 @@ function Index() {
         });
     };
 
-    const isShowCheckIn = () => {
-        return dayjs().isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day') ? false : true;
-    };
+    const isShowCheckIn = useMemo(() => {
+        if (!data?.check_ins[0]?.check_in_date) {
+            return true;
+        }
+        return !dayjs().isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
+    }, [data]);
 
     // 判断最后一次签到是否是昨天
     const isYesterdayCheckIn = () => {
-        return dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
+        if (!data?.check_ins[0]?.check_in_date) {
+            return false;
+        }
+        return !dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
     };
 
     // 获取前一天的连续签到天数
@@ -125,12 +132,18 @@ function Index() {
         return list;
     };
 
+    useEffect(() => {
+        if (checkInData) {
+            fetch();
+        }
+    }, [checkInData]);
+
     useDidShow(async () => {
         setUserInfo(await fetchUserInfo());
     });
 
     return (
-        <View className='flex flex-col'>
+        <View className='flex flex-col pb-80px'>
             <View className='mb-20px'>
                 <NutSwiper autoPlay height={200} defaultValue={0} className='w-full'>
                     {data?.ads?.map((item, index) => (
@@ -189,7 +202,7 @@ function Index() {
                                 }天可领取福利券...
                             </TaroText>
                         </View>
-                        {isShowCheckIn() ? (
+                        {isShowCheckIn ? (
                             <View
                                 className='w-160px text-center py-8px bg-primary rd-10px text-30px c-white fw-600'
                                 onClick={handleCheckIn}

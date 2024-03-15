@@ -295,7 +295,6 @@ function Index() {
     };
 
     const save = (values) => {
-        const { __typename, ...rest } = values;
         if (!glucoseValue || glucoseValue === '0.0') {
             Taro.showToast({
                 title: '请填写血糖值',
@@ -303,6 +302,7 @@ function Index() {
             });
             return;
         }
+        const { __typename, ...rest } = values ?? {};
 
         if (id) {
             updateGlucoseRecord({
