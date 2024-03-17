@@ -85,6 +85,14 @@ function Index() {
             });
             return;
         }
+        if (!/^1[3-9]\d{9}$/.test(phoneNumber)) {
+            Taro.showToast({
+                title: '请输入正确的手机号',
+                icon: 'none',
+            });
+            return;
+        }
+
         insertSmsCode({
             object: {
                 phone_number: phoneNumber,

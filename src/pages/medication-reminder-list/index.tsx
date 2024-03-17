@@ -55,9 +55,11 @@ function Index() {
                             <TaroText className='text-30px c-black'>
                                 {item.name}
                             </TaroText>
-                            <TaroText className='text-24px c-#999999'>
-                            用法用量：{item.usage_dosage}
-                            </TaroText>
+                            {item.usage_dosage && (
+                                <TaroText className='text-24px c-#999999'>
+                                    用法用量：{item.usage_dosage}
+                                </TaroText>
+                            )}
                         </View>
                         <View onClick={() => handleDelete(item.id)}>
                             <NutIconTrash color='#EC6400' size={20} />

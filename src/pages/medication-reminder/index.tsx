@@ -129,30 +129,18 @@ function Index() {
                         <NutForm.Item
                             name='spec'
                             label='药品规格'
-                            rules={[{
-                                required: true,
-                                message: '请输入药品规格',
-                            }]}
                         >
                             <NutInput align='right' placeholder='请输入药品规格' />
                         </NutForm.Item>
                         <NutForm.Item
                             name='usage_dosage'
                             label='用法用量'
-                            rules={[{
-                                required: true,
-                                message: '请输入用法用量',
-                            }]}
                         >
                             <NutInput align='right' placeholder='请输入用法用量' />
                         </NutForm.Item>
                         <NutForm.Item
                             name='manufacturer'
                             label='生产厂家'
-                            rules={[{
-                                required: true,
-                                message: '请输入生产厂家',
-                            }]}
                         >
                             <NutInput align='right' placeholder='请输入生产厂家' />
                         </NutForm.Item>
