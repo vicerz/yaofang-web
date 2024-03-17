@@ -1,4 +1,6 @@
 import Taro from '@tarojs/taro';
+import { useLogto } from '@logto/react';
+
 import './index.scss';
 
 const MedicationReminderListQueryDocument = graphql(`
@@ -20,6 +22,8 @@ const DeleteMedicationReminderMutationDocument = graphql(`
 `);
 
 function Index() {
+    const { fetchUserInfo } = useLogto();
+
     const [{ data }, fetch] = useQuery({
         query: MedicationReminderListQueryDocument,
         requestPolicy: 'network-only',
@@ -40,6 +44,31 @@ function Index() {
                 }
             },
         });
+    };
+
+    const handleAdd = async () => {
+        Taro.showLoading({
+            title: '加载中',
+        });
+        const userInfo = await fetchUserInfo();
+        Taro.hideLoading();
+        if (!userInfo?.phone_number) {
+            Taro.showModal({
+                title: '完善信息',
+                content: '请完善您的个人信息，以便我们更好的为您服务。',
+                confirmText: '去完善',
+                confirmColor: '#EC6400',
+                success: (res) => {
+                    if (res.confirm) {
+                        Router.toProfile();
+                    }
+                },
+            });
+            return;
+        }
+
+        await Router.toMedicationReminder();
+        fetch();
     };
 
     return (
@@ -73,10 +102,7 @@ function Index() {
             {(data?.medication_reminders.length || 0) < 5 && (
                 <View
                     className='w-full text-center bg-#F5F6F6 rd-20px py-26px text-30px c-primary fw-600'
-                    onClick={async () => {
-                        await Router.toMedicationReminder();
-                        fetch();
-                    }}
+                    onClick={handleAdd}
                 >
                     ＋ 新增用药
                 </View>

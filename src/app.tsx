@@ -13,7 +13,10 @@ function App(props) {
     });
     // 对应 onShow
     useDidShow(() => {
-        window.history.replaceState(null, '', window.location.href);
+        const isIOS= !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isIOS) {
+            window.history.pushState({}, "title", "");
+        }
     });
 
     // 对应 onHide

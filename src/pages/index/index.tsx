@@ -86,13 +86,20 @@ function Index() {
     };
 
     // 获取前一天的连续签到天数
-    const getYesterdayConsecutiveDays = () => {
+    const getYesterdayConsecutiveDays = useMemo(() => {
+        if (!data?.check_ins[0]?.check_in_date) {
+            return 0;
+        }
+        if (!data?.check_ins[0].is_continuation && !isYesterdayCheckIn()) {
+            return data.check_ins[0].consecutive_days;
+        }
+
         if ((!data?.check_ins[0].is_continuation && isYesterdayCheckIn()) || data?.check_ins[0].is_continuation) {
             return data?.check_ins[0]?.consecutive_days;
         } else {
             return 0;
         }
-    };
+    }, [data]);
 
     const allowedReceive = () => {
         if (!(userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted && data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
@@ -118,7 +125,7 @@ function Index() {
         const list: {type: 'unchecked' | 'checked' | 'coupon' | 'coupon-checked'}[] = [];
         const length = (userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted ? data?.check_in_settings[0]?.following : data?.check_in_settings[0]?.inaugural;
         for (let i = 0; i < length - 1; i++) {
-            if (i < (getYesterdayConsecutiveDays() || 0)) {
+            if (i < (getYesterdayConsecutiveDays || 0)) {
                 list.push({type: 'checked'});
             } else {
                 list.push({type: 'unchecked'});
@@ -172,7 +179,7 @@ function Index() {
                     }}
                 >
                     <View className='flex items-center gap-20px'>
-                        <TaroText className='text-30px fw-600 color-black'>已连续签到 {getYesterdayConsecutiveDays()} 天</TaroText>
+                        <TaroText className='text-30px fw-600 color-black'>已连续签到 {getYesterdayConsecutiveDays} 天</TaroText>
                         {allowedReceive() && (
                             <View
                                 className='px-16px py-4px bg-primary rd-8px text-22px c-white'

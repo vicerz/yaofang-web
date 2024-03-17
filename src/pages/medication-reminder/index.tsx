@@ -12,7 +12,7 @@ const InsertMedicationReminderMutationDocument = graphql(`
 `);
 
 function Index() {
-    const { fetchUserInfo } = useLogto();
+    const { getIdTokenClaims } = useLogto();
 
     const [countPikerVisible, setCountPikerVisible] = useState(false);
     const [timePickerVisible, setTimePickerVisible] = useState(false);
@@ -56,29 +56,14 @@ function Index() {
             return;
         }
 
-        const userInfo = await fetchUserInfo();
-
-        if (!userInfo?.phone_number) {
-            Taro.showModal({
-                title: '完善信息',
-                content: '请完善您的个人信息，以便我们更好的为您服务。',
-                confirmText: '去完善',
-                confirmColor: '#EC6400',
-                success: (res) => {
-                    if (res.confirm) {
-                        Router.toProfile();
-                    }
-                },
-            });
-            return;
-        }
+        const userInfo = await getIdTokenClaims();
 
         insertMedicationReminder({
             object: {
                 ...values,
                 reminder_times: reminderTimes,
                 doses_per_day: dosesPerDay,
-                phone_number: userInfo.phone_number,
+                phone_number: userInfo?.phone_number,
             },
         }).then(({ error }) => {
             if (!error) {

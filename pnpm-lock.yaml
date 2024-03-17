@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@logto/browser':
-    specifier: ^2.2.3
-    version: 2.2.3
   '@logto/react':
     specifier: ^3.0.0
     version: 3.0.0(react@18.2.0)
@@ -92,6 +89,9 @@ dependencies:
   urql:
     specifier: ^4.0.6
     version: 4.0.6(graphql@16.8.1)(react@18.2.0)
+  vconsole:
+    specifier: ^3.15.1
+    version: 3.15.1
 
 devDependencies:
   '@babel/core':
@@ -205,9 +205,6 @@ devDependencies:
   tarojs-router-next-plugin:
     specifier: ^3.4.0
     version: 3.4.0
-  terser-webpack-plugin:
-    specifier: ^5.3.10
-    version: 5.3.10(@swc/core@1.3.96)(esbuild@0.19.12)(webpack@5.90.3)
   ts-node:
     specifier: ^10.9.1
     version: 10.9.2(@swc/core@1.3.96)(@types/node@18.19.18)(typescript@4.9.5)
@@ -6953,6 +6950,11 @@ packages:
       is-what: 3.14.1
     dev: true
 
+  /copy-text-to-clipboard@3.2.0:
+    resolution: {integrity: sha512-RnJFp1XR/LOBDckxTib5Qjr/PMfkatD0MUCQgdpqS8MdKiNUzBjAQBEN6oUy+jW7LI93BBG3DtMB2KOOKpGs2Q==}
+    engines: {node: '>=12'}
+    dev: false
+
   /copy-webpack-plugin@10.2.0(webpack@5.90.3):
     resolution: {integrity: sha512-my6iXII95c78w14HzYCNya5TlJYa44lOppAge5GSTMM1SyDxNsVGCJvhP4/ld6snm8lzjn3XOonMZD6s1L86Og==}
     engines: {node: '>= 12.20.0'}
@@ -6980,7 +6982,6 @@ packages:
   /core-js@3.36.0:
     resolution: {integrity: sha512-mt7+TUBbTFg5+GngsAxeKBTl5/VS0guFeJacYge9OmHb+m058UwwIm41SE9T4Den7ClatV57B6TYTuJ0CX1MAw==}
     requiresBuild: true
-    dev: true
 
   /core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
@@ -11408,6 +11409,10 @@ packages:
       minimatch: 3.1.2
     dev: true
 
+  /mutation-observer@1.0.3:
+    resolution: {integrity: sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA==}
+    dev: false
+
   /mute-stream@0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
@@ -15102,6 +15107,15 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /vconsole@3.15.1:
+    resolution: {integrity: sha512-KH8XLdrq9T5YHJO/ixrjivHfmF2PC2CdVoK6RWZB4yftMykYIaXY1mxZYAic70vADM54kpMQF+dYmvl5NRNy1g==}
+    dependencies:
+      '@babel/runtime': 7.23.9
+      copy-text-to-clipboard: 3.2.0
+      core-js: 3.36.0
+      mutation-observer: 1.0.3
+    dev: false
 
   /verror@1.10.0:
     resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
