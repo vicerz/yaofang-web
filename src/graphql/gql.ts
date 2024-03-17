@@ -51,9 +51,11 @@ const documents = {
     "\n    mutation InsertMedicalReportRecordOneMutation($object: medical_examination_records_insert_input!) {\n        insert_medical_examination_records_one(object: $object) {\n            id\n        }\n    }\n": types.InsertMedicalReportRecordOneMutationDocument,
     "\n    mutation UpdateMedicalReportRecordOneMutation($id: uuid!, $object: medical_examination_records_set_input!) {\n        update_medical_examination_records_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n": types.UpdateMedicalReportRecordOneMutationDocument,
     "\n    query MedicationReminderListQuery {\n        medication_reminders {\n            id\n            name\n            usage_dosage\n        }\n    }\n": types.MedicationReminderListQueryDocument,
-    "\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n": types.InsertMedicationReminderMutationDocument,
     "\n    mutation DeleteMedicationReminderMutation($id: uuid!) {\n        delete_medication_reminders_by_pk(id: $id) {\n            id\n        }\n    }\n": types.DeleteMedicationReminderMutationDocument,
+    "\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n": types.InsertMedicationReminderMutationDocument,
     "\n    mutation UpdateUserInfoMutation($id: String!, $object: users_set_input!) {\n        update_users_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n": types.UpdateUserInfoMutationDocument,
+    "\n    mutation InsertSmsCodeMutation($object: sms_codes_insert_input!) {\n        insert_sms_codes_one(object: $object) {\n            created_at\n        }\n    }\n": types.InsertSmsCodeMutationDocument,
+    "\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n": types.SmsCodeQueryDocument,
 };
 
 /**
@@ -225,15 +227,23 @@ export function graphql(source: "\n    query MedicationReminderListQuery {\n    
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n"): (typeof documents)["\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function graphql(source: "\n    mutation DeleteMedicationReminderMutation($id: uuid!) {\n        delete_medication_reminders_by_pk(id: $id) {\n            id\n        }\n    }\n"): (typeof documents)["\n    mutation DeleteMedicationReminderMutation($id: uuid!) {\n        delete_medication_reminders_by_pk(id: $id) {\n            id\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n"): (typeof documents)["\n    mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {\n        insert_medication_reminders_one(object: $object) {\n            id\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n    mutation UpdateUserInfoMutation($id: String!, $object: users_set_input!) {\n        update_users_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n"): (typeof documents)["\n    mutation UpdateUserInfoMutation($id: String!, $object: users_set_input!) {\n        update_users_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation InsertSmsCodeMutation($object: sms_codes_insert_input!) {\n        insert_sms_codes_one(object: $object) {\n            created_at\n        }\n    }\n"): (typeof documents)["\n    mutation InsertSmsCodeMutation($object: sms_codes_insert_input!) {\n        insert_sms_codes_one(object: $object) {\n            created_at\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n"): (typeof documents)["\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

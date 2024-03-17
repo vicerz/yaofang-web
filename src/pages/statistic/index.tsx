@@ -7,7 +7,7 @@ import './index.scss';
 
 function Index() {
     return (
-        <View className='flex flex-col px-40px gap-38px pt-60px'>
+        <View className='flex flex-col px-40px gap-38px pt-60px pb-180px'>
             <View
                 className='relative h-220px bg-contain bg-center bg-no-repeat'
                 style={{

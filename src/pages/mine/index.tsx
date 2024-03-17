@@ -41,7 +41,7 @@ function Index() {
     }, []);
 
     return (
-        <View>
+        <View className='pb-180px'>
             <View
                 className='relative top-0 left-0 z--1 flex flex-col items-center gap-20px px-40px pt-60px pb-40px bg-no-repeat h-546px'
                 style={{

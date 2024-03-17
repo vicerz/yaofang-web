@@ -1,6 +1,7 @@
-import dayjs from 'dayjs';
-import './index.scss';
 import Taro from '@tarojs/taro';
+
+import './index.scss';
+import { useLogto } from '@logto/react';
 
 const InsertMedicationReminderMutationDocument = graphql(`
     mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {
@@ -11,6 +12,8 @@ const InsertMedicationReminderMutationDocument = graphql(`
 `);
 
 function Index() {
+    const { fetchUserInfo } = useLogto();
+
     const [countPikerVisible, setCountPikerVisible] = useState(false);
     const [timePickerVisible, setTimePickerVisible] = useState(false);
     const [dosesPerDay, setDosesPerDay] = useState(1);
@@ -36,7 +39,7 @@ function Index() {
         ],
     ];
 
-    const save = (values) => {
+    const save = async (values) => {
         if (!dosesPerDay) {
             Taro.showToast({
                 title: '请选择每天用药次数',
@@ -53,11 +56,29 @@ function Index() {
             return;
         }
 
+        const userInfo = await fetchUserInfo();
+
+        if (!userInfo?.phone_number) {
+            Taro.showModal({
+                title: '完善信息',
+                content: '请完善您的个人信息，以便我们更好的为您服务。',
+                confirmText: '去完善',
+                confirmColor: '#EC6400',
+                success: (res) => {
+                    if (res.confirm) {
+                        Router.toProfile();
+                    }
+                },
+            });
+            return;
+        }
+
         insertMedicationReminder({
             object: {
                 ...values,
                 reminder_times: reminderTimes,
                 doses_per_day: dosesPerDay,
+                phone_number: userInfo.phone_number,
             },
         }).then(({ error }) => {
             if (!error) {
@@ -108,6 +129,10 @@ function Index() {
                         <NutForm.Item
                             name='spec'
                             label='药品规格'
+                            rules={[{
+                                required: true,
+                                message: '请输入药品规格',
+                            }]}
                         >
                             <NutInput align='right' placeholder='请输入药品规格' />
                         </NutForm.Item>
@@ -124,6 +149,10 @@ function Index() {
                         <NutForm.Item
                             name='manufacturer'
                             label='生产厂家'
+                            rules={[{
+                                required: true,
+                                message: '请输入生产厂家',
+                            }]}
                         >
                             <NutInput align='right' placeholder='请输入生产厂家' />
                         </NutForm.Item>

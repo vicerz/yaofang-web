@@ -68,10 +68,13 @@ function Index() {
                             <NutIconArrowSize8 color='#B3BAC5' className='ml-auto' />
                         </View>
                     ))}
+
+                    {list.length === 0 && (
+                        <NutEmpty description='还没有化验报告' />
+                    )}
                 </View>
             </NutInfiniteLoading>
         </View>
-
     );
 }
 

@@ -326,9 +326,12 @@ function Index() {
                             },
                         ]
                     }
-                ]
+                ],
+                label: {
+                    visible: glucoseRecordsPieChartData.tooLarge.aggregate?.count && glucoseRecordsPieChartData.normal.aggregate?.count && glucoseRecordsPieChartData.tooSmall.aggregate?.count,
+                }
             };
-            setPieChartSpec(newPieChartSpec);
+            setPieChartSpec(newPieChartSpec as any);
         }
     }, [glucoseRecordsPieChartData]);
 

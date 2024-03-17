@@ -5644,6 +5644,7 @@ export type Medication_Reminders = {
   /** 生产厂家 */
   manufacturer: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  phone_number?: Maybe<Scalars['String']['output']>;
   /** 提醒时间数组 */
   reminder_times: Array<Scalars['String']['output']>;
   spec: Scalars['String']['output'];
@@ -5696,6 +5697,7 @@ export type Medication_Reminders_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   manufacturer?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  phone_number?: InputMaybe<String_Comparison_Exp>;
   reminder_times?: InputMaybe<String_Array_Comparison_Exp>;
   spec?: InputMaybe<String_Comparison_Exp>;
   usage_dosage?: InputMaybe<String_Comparison_Exp>;
@@ -5723,6 +5725,7 @@ export type Medication_Reminders_Insert_Input = {
   /** 生产厂家 */
   manufacturer?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
   /** 提醒时间数组 */
   reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
   spec?: InputMaybe<Scalars['String']['input']>;
@@ -5740,6 +5743,7 @@ export type Medication_Reminders_Max_Fields = {
   /** 生产厂家 */
   manufacturer?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   /** 提醒时间数组 */
   reminder_times?: Maybe<Array<Scalars['String']['output']>>;
   spec?: Maybe<Scalars['String']['output']>;
@@ -5757,6 +5761,7 @@ export type Medication_Reminders_Min_Fields = {
   /** 生产厂家 */
   manufacturer?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   /** 提醒时间数组 */
   reminder_times?: Maybe<Array<Scalars['String']['output']>>;
   spec?: Maybe<Scalars['String']['output']>;
@@ -5787,6 +5792,7 @@ export type Medication_Reminders_Order_By = {
   id?: InputMaybe<Order_By>;
   manufacturer?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  phone_number?: InputMaybe<Order_By>;
   reminder_times?: InputMaybe<Order_By>;
   spec?: InputMaybe<Order_By>;
   usage_dosage?: InputMaybe<Order_By>;
@@ -5811,6 +5817,8 @@ export enum Medication_Reminders_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  PhoneNumber = 'phone_number',
+  /** column name */
   ReminderTimes = 'reminder_times',
   /** column name */
   Spec = 'spec',
@@ -5829,6 +5837,7 @@ export type Medication_Reminders_Set_Input = {
   /** 生产厂家 */
   manufacturer?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
   /** 提醒时间数组 */
   reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
   spec?: InputMaybe<Scalars['String']['input']>;
@@ -5872,6 +5881,7 @@ export type Medication_Reminders_Stream_Cursor_Value_Input = {
   /** 生产厂家 */
   manufacturer?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
   /** 提醒时间数组 */
   reminder_times?: InputMaybe<Array<Scalars['String']['input']>>;
   spec?: InputMaybe<Scalars['String']['input']>;
@@ -5898,6 +5908,8 @@ export enum Medication_Reminders_Update_Column {
   Manufacturer = 'manufacturer',
   /** column name */
   Name = 'name',
+  /** column name */
+  PhoneNumber = 'phone_number',
   /** column name */
   ReminderTimes = 'reminder_times',
   /** column name */
@@ -6109,6 +6121,10 @@ export type Mutation_Root = {
   delete_sign_in_experiences?: Maybe<Sign_In_Experiences_Mutation_Response>;
   /** delete single row from the table: "sign_in_experiences" */
   delete_sign_in_experiences_by_pk?: Maybe<Sign_In_Experiences>;
+  /** delete data from the table: "sms_codes" */
+  delete_sms_codes?: Maybe<Sms_Codes_Mutation_Response>;
+  /** delete single row from the table: "sms_codes" */
+  delete_sms_codes_by_pk?: Maybe<Sms_Codes>;
   /** delete data from the table: "sso_connectors" */
   delete_sso_connectors?: Maybe<Sso_Connectors_Mutation_Response>;
   /** delete single row from the table: "sso_connectors" */
@@ -6317,6 +6333,10 @@ export type Mutation_Root = {
   insert_sign_in_experiences?: Maybe<Sign_In_Experiences_Mutation_Response>;
   /** insert a single row into the table: "sign_in_experiences" */
   insert_sign_in_experiences_one?: Maybe<Sign_In_Experiences>;
+  /** insert data into the table: "sms_codes" */
+  insert_sms_codes?: Maybe<Sms_Codes_Mutation_Response>;
+  /** insert a single row into the table: "sms_codes" */
+  insert_sms_codes_one?: Maybe<Sms_Codes>;
   /** insert data into the table: "sso_connectors" */
   insert_sso_connectors?: Maybe<Sso_Connectors_Mutation_Response>;
   /** insert a single row into the table: "sso_connectors" */
@@ -6611,6 +6631,12 @@ export type Mutation_Root = {
   update_sign_in_experiences_by_pk?: Maybe<Sign_In_Experiences>;
   /** update multiples rows of table: "sign_in_experiences" */
   update_sign_in_experiences_many?: Maybe<Array<Maybe<Sign_In_Experiences_Mutation_Response>>>;
+  /** update data of the table: "sms_codes" */
+  update_sms_codes?: Maybe<Sms_Codes_Mutation_Response>;
+  /** update single row of the table: "sms_codes" */
+  update_sms_codes_by_pk?: Maybe<Sms_Codes>;
+  /** update multiples rows of table: "sms_codes" */
+  update_sms_codes_many?: Maybe<Array<Maybe<Sms_Codes_Mutation_Response>>>;
   /** update data of the table: "sso_connectors" */
   update_sso_connectors?: Maybe<Sso_Connectors_Mutation_Response>;
   /** update single row of the table: "sso_connectors" */
@@ -7199,6 +7225,18 @@ export type Mutation_RootDelete_Sign_In_ExperiencesArgs = {
 export type Mutation_RootDelete_Sign_In_Experiences_By_PkArgs = {
   id: Scalars['String']['input'];
   tenant_id: Scalars['String']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Sms_CodesArgs = {
+  where: Sms_Codes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Sms_Codes_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -7908,6 +7946,20 @@ export type Mutation_RootInsert_Sign_In_ExperiencesArgs = {
 export type Mutation_RootInsert_Sign_In_Experiences_OneArgs = {
   object: Sign_In_Experiences_Insert_Input;
   on_conflict?: InputMaybe<Sign_In_Experiences_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Sms_CodesArgs = {
+  objects: Array<Sms_Codes_Insert_Input>;
+  on_conflict?: InputMaybe<Sms_Codes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Sms_Codes_OneArgs = {
+  object: Sms_Codes_Insert_Input;
+  on_conflict?: InputMaybe<Sms_Codes_On_Conflict>;
 };
 
 
@@ -9052,6 +9104,26 @@ export type Mutation_RootUpdate_Sign_In_Experiences_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Sign_In_Experiences_ManyArgs = {
   updates: Array<Sign_In_Experiences_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Sms_CodesArgs = {
+  _set?: InputMaybe<Sms_Codes_Set_Input>;
+  where: Sms_Codes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Sms_Codes_By_PkArgs = {
+  _set?: InputMaybe<Sms_Codes_Set_Input>;
+  pk_columns: Sms_Codes_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Sms_Codes_ManyArgs = {
+  updates: Array<Sms_Codes_Updates>;
 };
 
 
@@ -12446,6 +12518,12 @@ export type Query_Root = {
   sign_in_experiences_aggregate: Sign_In_Experiences_Aggregate;
   /** fetch data from the table: "sign_in_experiences" using primary key columns */
   sign_in_experiences_by_pk?: Maybe<Sign_In_Experiences>;
+  /** fetch data from the table: "sms_codes" */
+  sms_codes: Array<Sms_Codes>;
+  /** fetch aggregated fields from the table: "sms_codes" */
+  sms_codes_aggregate: Sms_Codes_Aggregate;
+  /** fetch data from the table: "sms_codes" using primary key columns */
+  sms_codes_by_pk?: Maybe<Sms_Codes>;
   /** fetch data from the table: "sso_connectors" */
   sso_connectors: Array<Sso_Connectors>;
   /** fetch aggregated fields from the table: "sso_connectors" */
@@ -13538,6 +13616,29 @@ export type Query_RootSign_In_Experiences_AggregateArgs = {
 export type Query_RootSign_In_Experiences_By_PkArgs = {
   id: Scalars['String']['input'];
   tenant_id: Scalars['String']['input'];
+};
+
+
+export type Query_RootSms_CodesArgs = {
+  distinct_on?: InputMaybe<Array<Sms_Codes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Sms_Codes_Order_By>>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
+};
+
+
+export type Query_RootSms_Codes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Sms_Codes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Sms_Codes_Order_By>>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
+};
+
+
+export type Query_RootSms_Codes_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -15422,6 +15523,170 @@ export type Smallint_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['smallint']['input']>>;
 };
 
+/** 短信验证码 */
+export type Sms_Codes = {
+  captcha: Scalars['String']['output'];
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['uuid']['output'];
+  phone_number: Scalars['String']['output'];
+  user_id: Scalars['String']['output'];
+};
+
+/** aggregated selection of "sms_codes" */
+export type Sms_Codes_Aggregate = {
+  aggregate?: Maybe<Sms_Codes_Aggregate_Fields>;
+  nodes: Array<Sms_Codes>;
+};
+
+/** aggregate fields of "sms_codes" */
+export type Sms_Codes_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<Sms_Codes_Max_Fields>;
+  min?: Maybe<Sms_Codes_Min_Fields>;
+};
+
+
+/** aggregate fields of "sms_codes" */
+export type Sms_Codes_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Sms_Codes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "sms_codes". All fields are combined with a logical 'AND'. */
+export type Sms_Codes_Bool_Exp = {
+  _and?: InputMaybe<Array<Sms_Codes_Bool_Exp>>;
+  _not?: InputMaybe<Sms_Codes_Bool_Exp>;
+  _or?: InputMaybe<Array<Sms_Codes_Bool_Exp>>;
+  captcha?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  phone_number?: InputMaybe<String_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "sms_codes" */
+export enum Sms_Codes_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  SmsCodesPkey = 'sms_codes_pkey'
+}
+
+/** input type for inserting data into table "sms_codes" */
+export type Sms_Codes_Insert_Input = {
+  captcha?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Sms_Codes_Max_Fields = {
+  captcha?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Sms_Codes_Min_Fields = {
+  captcha?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "sms_codes" */
+export type Sms_Codes_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Sms_Codes>;
+};
+
+/** on_conflict condition type for table "sms_codes" */
+export type Sms_Codes_On_Conflict = {
+  constraint: Sms_Codes_Constraint;
+  update_columns?: Array<Sms_Codes_Update_Column>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "sms_codes". */
+export type Sms_Codes_Order_By = {
+  captcha?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  phone_number?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: sms_codes */
+export type Sms_Codes_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
+};
+
+/** select columns of table "sms_codes" */
+export enum Sms_Codes_Select_Column {
+  /** column name */
+  Captcha = 'captcha',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PhoneNumber = 'phone_number',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "sms_codes" */
+export type Sms_Codes_Set_Input = {
+  captcha?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "sms_codes" */
+export type Sms_Codes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Sms_Codes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Sms_Codes_Stream_Cursor_Value_Input = {
+  captcha?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "sms_codes" */
+export enum Sms_Codes_Update_Column {
+  /** column name */
+  Captcha = 'captcha',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PhoneNumber = 'phone_number',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Sms_Codes_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Sms_Codes_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Sms_Codes_Bool_Exp;
+};
+
 /** columns and relationships of "sso_connectors" */
 export type Sso_Connectors = {
   branding: Scalars['jsonb']['output'];
@@ -16046,6 +16311,14 @@ export type Subscription_Root = {
   sign_in_experiences_by_pk?: Maybe<Sign_In_Experiences>;
   /** fetch data from the table in a streaming manner: "sign_in_experiences" */
   sign_in_experiences_stream: Array<Sign_In_Experiences>;
+  /** fetch data from the table: "sms_codes" */
+  sms_codes: Array<Sms_Codes>;
+  /** fetch aggregated fields from the table: "sms_codes" */
+  sms_codes_aggregate: Sms_Codes_Aggregate;
+  /** fetch data from the table: "sms_codes" using primary key columns */
+  sms_codes_by_pk?: Maybe<Sms_Codes>;
+  /** fetch data from the table in a streaming manner: "sms_codes" */
+  sms_codes_stream: Array<Sms_Codes>;
   /** fetch data from the table: "sso_connectors" */
   sso_connectors: Array<Sso_Connectors>;
   /** fetch aggregated fields from the table: "sso_connectors" */
@@ -17471,6 +17744,36 @@ export type Subscription_RootSign_In_Experiences_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Sign_In_Experiences_Stream_Cursor_Input>>;
   where?: InputMaybe<Sign_In_Experiences_Bool_Exp>;
+};
+
+
+export type Subscription_RootSms_CodesArgs = {
+  distinct_on?: InputMaybe<Array<Sms_Codes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Sms_Codes_Order_By>>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
+};
+
+
+export type Subscription_RootSms_Codes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Sms_Codes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Sms_Codes_Order_By>>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
+};
+
+
+export type Subscription_RootSms_Codes_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootSms_Codes_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Sms_Codes_Stream_Cursor_Input>>;
+  where?: InputMaybe<Sms_Codes_Bool_Exp>;
 };
 
 
@@ -19886,19 +20189,19 @@ export type MedicationReminderListQueryQueryVariables = Exact<{ [key: string]: n
 
 export type MedicationReminderListQueryQuery = { medication_reminders: Array<{ id: any, name: string, usage_dosage: string }> };
 
-export type InsertMedicationReminderMutationMutationVariables = Exact<{
-  object: Medication_Reminders_Insert_Input;
-}>;
-
-
-export type InsertMedicationReminderMutationMutation = { insert_medication_reminders_one?: { id: any } | null };
-
 export type DeleteMedicationReminderMutationMutationVariables = Exact<{
   id: Scalars['uuid']['input'];
 }>;
 
 
 export type DeleteMedicationReminderMutationMutation = { delete_medication_reminders_by_pk?: { id: any } | null };
+
+export type InsertMedicationReminderMutationMutationVariables = Exact<{
+  object: Medication_Reminders_Insert_Input;
+}>;
+
+
+export type InsertMedicationReminderMutationMutation = { insert_medication_reminders_one?: { id: any } | null };
 
 export type UpdateUserInfoMutationMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -19907,6 +20210,21 @@ export type UpdateUserInfoMutationMutationVariables = Exact<{
 
 
 export type UpdateUserInfoMutationMutation = { update_users_by_pk?: { id: string } | null };
+
+export type InsertSmsCodeMutationMutationVariables = Exact<{
+  object: Sms_Codes_Insert_Input;
+}>;
+
+
+export type InsertSmsCodeMutationMutation = { insert_sms_codes_one?: { created_at: any } | null };
+
+export type SmsCodeQueryQueryVariables = Exact<{
+  phone_number: Scalars['String']['input'];
+  captcha: Scalars['String']['input'];
+}>;
+
+
+export type SmsCodeQueryQuery = { sms_codes: Array<{ id: any }> };
 
 
 export const CholesterolRecordDetailQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordDetailQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}},{"kind":"Field","name":{"kind":"Name","value":"symptoms"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordDetailQueryQuery, CholesterolRecordDetailQueryQueryVariables>;
@@ -19947,6 +20265,8 @@ export const MedicalReportRecordDetailQueryDocument = {"kind":"Document","defini
 export const InsertMedicalReportRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertMedicalReportRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medical_examination_records_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_medical_examination_records_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertMedicalReportRecordOneMutationMutation, InsertMedicalReportRecordOneMutationMutationVariables>;
 export const UpdateMedicalReportRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateMedicalReportRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medical_examination_records_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_medical_examination_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateMedicalReportRecordOneMutationMutation, UpdateMedicalReportRecordOneMutationMutationVariables>;
 export const MedicationReminderListQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MedicationReminderListQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"medication_reminders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"usage_dosage"}}]}}]}}]} as unknown as DocumentNode<MedicationReminderListQueryQuery, MedicationReminderListQueryQueryVariables>;
-export const InsertMedicationReminderMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertMedicationReminderMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medication_reminders_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_medication_reminders_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertMedicationReminderMutationMutation, InsertMedicationReminderMutationMutationVariables>;
 export const DeleteMedicationReminderMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMedicationReminderMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_medication_reminders_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteMedicationReminderMutationMutation, DeleteMedicationReminderMutationMutationVariables>;
+export const InsertMedicationReminderMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertMedicationReminderMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"medication_reminders_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_medication_reminders_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertMedicationReminderMutationMutation, InsertMedicationReminderMutationMutationVariables>;
 export const UpdateUserInfoMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUserInfoMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_users_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserInfoMutationMutation, UpdateUserInfoMutationMutationVariables>;
+export const InsertSmsCodeMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertSmsCodeMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"sms_codes_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_sms_codes_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]} as unknown as DocumentNode<InsertSmsCodeMutationMutation, InsertSmsCodeMutationMutationVariables>;
+export const SmsCodeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SmsCodeQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"phone_number"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"captcha"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sms_codes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"phone_number"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"phone_number"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"captcha"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"captcha"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<SmsCodeQueryQuery, SmsCodeQueryQueryVariables>;

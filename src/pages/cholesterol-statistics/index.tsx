@@ -281,6 +281,7 @@ function Index() {
 
     useEffect(() => {
         if (cholesterolRecordsPieChartData) {
+
             // 按时间范围生成饼图数据
             const newPieChartSpec = {
                 ...pieChartSpec,
@@ -301,9 +302,13 @@ function Index() {
                             },
                         ]
                     }
-                ]
+                ],
+                label: {
+                    visible: cholesterolRecordsPieChartData.tooSmall.aggregate?.count && cholesterolRecordsPieChartData.tooLarge.aggregate?.count && cholesterolRecordsPieChartData.normal.aggregate?.count,
+                },
             };
-            setPieChartSpec(newPieChartSpec);
+
+            setPieChartSpec(newPieChartSpec as any);
         }
     }, [cholesterolRecordsPieChartData]);
 

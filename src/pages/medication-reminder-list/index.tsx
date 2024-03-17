@@ -20,8 +20,9 @@ const DeleteMedicationReminderMutationDocument = graphql(`
 `);
 
 function Index() {
-    const [{ data }] = useQuery({
+    const [{ data }, fetch] = useQuery({
         query: MedicationReminderListQueryDocument,
+        requestPolicy: 'network-only',
     });
 
     const [, deleteMedicationReminder] = useMutation(DeleteMedicationReminderMutationDocument);
@@ -30,6 +31,7 @@ function Index() {
         Taro.showModal({
             title: '提示',
             content: '确定要删除吗？',
+            confirmColor: '#EC6400',
             success: (res) => {
                 if (res.confirm) {
                     deleteMedicationReminder({
@@ -69,9 +71,12 @@ function Index() {
             {(data?.medication_reminders.length || 0) < 5 && (
                 <View
                     className='w-full text-center bg-#F5F6F6 rd-20px py-26px text-30px c-primary fw-600'
-                    onClick={() => Router.toMedicationReminder()}
+                    onClick={async () => {
+                        await Router.toMedicationReminder();
+                        fetch();
+                    }}
                 >
-                ＋ 新增用药
+                    ＋ 新增用药
                 </View>
             )}
             <View className='text-center text-20px c-#999999'>最多支持 5 个用药提醒</View>

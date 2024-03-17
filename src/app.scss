@@ -7,6 +7,9 @@
     --nutui-primary-color-end: #EC6400;
     --nutui-brand-color: var(--nut-primary-color);
     --nutui-brand-color-end: var(--nut-primary-color);
+    --nutui-color-primary-stop-1: var(--nut-primary-color);
+    --nutui-color-primary-stop-2: var(--nut-primary-color);
+
 
     background-color: #F4F4F4;
 
@@ -143,20 +146,7 @@
         }
     }
 
-    .nut-form-item{
-        width: 100%;
 
-        &.flex-col {
-            .nut-form-item__body {
-                width: 100%;
-            }
-        }
-
-        &::before {
-            transform: scaleY(0.5);
-            border-top: var(--nutui-cell-divider-border-bottom, 2px solid #f5f6f7);
-        }
-    }
 
     .sharp-textarea {
         background-color: #F4F4F4;
@@ -169,10 +159,25 @@
             padding: 16px;
         }
     }
+}
 
-    .nut-textarea {
-        .nut-textarea__textarea {
-            height: 100%;
+/* .nut-form-item{
+    width: 100%;
+
+    &.flex-col {
+        .nut-form-item__body {
+            width: 100%;
         }
     }
+
+    &::before {
+        transform: scaleY(0.5);
+        border-top: var(--nutui-cell-divider-border-bottom, 2px solid #f5f6f7);
+    }
 }
+
+.nut-textarea {
+    .nut-textarea__textarea {
+        height: 100%;
+    }
+} */

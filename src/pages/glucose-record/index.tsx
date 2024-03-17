@@ -366,7 +366,7 @@ function Index() {
 
     return (
         <>
-            <View className='flex flex-col'>
+            <View className='flex flex-col pb-100px'>
                 <View className='relative bg-#116E7F flex flex-col items-center justify-center gap-20px py-30px pb-80px'>
                     <View
                         className='w-380px flex items-center justify-center gap-10px bg-#148599 c-white p-5px rd-full'
@@ -386,7 +386,7 @@ function Index() {
                     </View>
                     <TaroText className='text-30 c-white'>{getMeasurementPeriodText()}目标: {getStandards()?.min}-{getStandards()?.max}mmol/L</TaroText>
                 </View>
-                <View className='relative z-1 mt--60px rd-t-50px bg-white h-140px px-40px pt-60px'>
+                <View className='relative z-1 mt--60px rd-t-50px bg-white px-40px pt-60px'>
                     <NutForm
                         form={form}
                         labelPosition='left'
@@ -433,19 +433,24 @@ function Index() {
                             <NutTextArea rows={5} placeholder='选填，建议备注饮食、运动等内容' />
                         </NutForm.Item>
                     </NutForm>
-                    <View className='flex gap-30px mt-50px pb-60px'>
-                        <SharpButton.Outline
-                            onClick={() => {
-                                Router.toIndex();
-                            }}
-                        >
-                            取消
-                        </SharpButton.Outline>
-                        <SharpButton.Primary onClick={form.submit}>
-                            保存
-                        </SharpButton.Primary>
-                    </View>
                 </View>
+            </View>
+
+            <View className='w-full pt-20px pb-60px fixed bottom-0 left-0 bg-white z-9999'>
+                <View className='px-40px flex gap-30px'>
+
+                    <SharpButton.Outline
+                        onClick={() => {
+                            Router.toIndex();
+                        }}
+                    >
+                            取消
+                    </SharpButton.Outline>
+                    <SharpButton.Primary onClick={form.submit}>
+                            保存
+                    </SharpButton.Primary>
+                </View>
+
             </View>
 
             <NutNumberKeyboard

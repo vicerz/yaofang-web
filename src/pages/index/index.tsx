@@ -82,12 +82,12 @@ function Index() {
         if (!data?.check_ins[0]?.check_in_date) {
             return false;
         }
-        return !dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
+        return dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
     };
 
     // 获取前一天的连续签到天数
     const getYesterdayConsecutiveDays = () => {
-        if (isYesterdayCheckIn()) {
+        if ((!data?.check_ins[0].is_continuation && isYesterdayCheckIn()) || data?.check_ins[0].is_continuation) {
             return data?.check_ins[0]?.consecutive_days;
         } else {
             return 0;
@@ -143,7 +143,7 @@ function Index() {
     });
 
     return (
-        <View className='flex flex-col pb-80px'>
+        <View className='flex flex-col pb-180px'>
             <View className='mb-20px'>
                 <NutSwiper autoPlay height={200} defaultValue={0} className='w-full'>
                     {data?.ads?.map((item, index) => (

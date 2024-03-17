@@ -10,10 +10,11 @@ import './app.scss';
 function App(props) {
     // 可以使用所有的 React Hooks
     useEffect(() => {
-        // sigIn();
     });
     // 对应 onShow
-    useDidShow(() => {});
+    useDidShow(() => {
+        window.history.replaceState(null, '', window.location.href);
+    });
 
     // 对应 onHide
     useDidHide(() => { });
