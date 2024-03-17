@@ -51,9 +51,10 @@ function Index() {
 
     const handleCheckIn = async () => {
         const newSignInDate = new Date();
+
         // 计算连续签到天数和是否连续签到
         let consecutiveDays = 0;
-        if (data?.check_ins?.length === 0 || newSignInDate.getTime() !== new Date(data?.check_ins[0].check_in_date).getTime() + 24 * 60 * 60 * 1000) {
+        if (data?.check_ins?.length === 0 || !isYesterdayCheckIn()){
             consecutiveDays = 1;
         } else {
             consecutiveDays = (data?.check_ins[0]?.consecutive_days || 0) + 1;
@@ -63,7 +64,7 @@ function Index() {
         // 插入一条签到记录
         await checkIn({
             object: {
-                check_in_date: newSignInDate,
+                check_in_date: dayjs(newSignInDate).format('YYYY-MM-DD'),
                 consecutive_days: consecutiveDays,
                 is_continuation: isContinuation,
             },
