@@ -226,9 +226,9 @@ function Index() {
             const newTableData: any[] = [];
             const dateRangeDays = dayjs(tableDateRange[1]).diff(tableDateRange[0], 'day');
             for (let i = 0; i <= dateRangeDays; i++) {
-                const date = dayjs(tableDateRange[0]).add(i, 'day').format('YYYY.MM.DD');
+                const date = dayjs(tableDateRange[0]).add(i, 'day').format('YYYY-MM-DD');
                 const cholesterolRecords = cholesterolRecordsData.cholesterol_records.filter(record => {
-                    return dayjs(record.record_time).format('YYYY.MM.DD') === date;
+                    return dayjs(record.record_time).format('YYYY-MM-DD') === date;
                 });
                 const rowData: any = {
                     date,

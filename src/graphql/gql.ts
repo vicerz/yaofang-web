@@ -41,7 +41,7 @@ const documents = {
     "\n    mutation CheckInMutation($object: check_ins_insert_input!) {\n        insert_check_ins_one(object: $object) {\n            id\n        }\n    }\n": types.CheckInMutationDocument,
     "\n    query LabReportRecordDetailQuery($id: uuid!) {\n        lab_report_records_by_pk(id: $id) {\n            assay_date\n            images\n            remarks\n            report_type\n        }\n    }\n": types.LabReportRecordDetailQueryDocument,
     "\n    mutation DeleteLabReportRecordMutation($id: uuid!) {\n        delete_lab_report_records_by_pk(id: $id) {\n            id\n        }\n    }\n": types.DeleteLabReportRecordMutationDocument,
-    "\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n        }\n    }\n": types.LabReportListQueryDocument,
+    "\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n            report_type\n        }\n    }\n": types.LabReportListQueryDocument,
     "\n    mutation InsertLabReportRecordOneMutation($object: lab_report_records_insert_input!) {\n        insert_lab_report_records_one(object: $object) {\n            id\n        }\n    }\n": types.InsertLabReportRecordOneMutationDocument,
     "\n    mutation UpdateLabReportRecordOneMutation($id: uuid!, $object: lab_report_records_set_input!) {\n        update_lab_report_records_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n": types.UpdateLabReportRecordOneMutationDocument,
     "\n    query MedicalReportRecordOneQuery($id: uuid!) {\n        medical_examination_records_by_pk(id: $id) {\n            exam_date\n            images\n            remarks\n        }\n    }\n": types.MedicalReportRecordOneQueryDocument,
@@ -187,7 +187,7 @@ export function graphql(source: "\n    mutation DeleteLabReportRecordMutation($i
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n        }\n    }\n"): (typeof documents)["\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n        }\n    }\n"];
+export function graphql(source: "\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n            report_type\n        }\n    }\n"): (typeof documents)["\n    query LabReportListQuery($offset: Int!, $limit: Int!) {\n        lab_report_records(order_by: {assay_date: desc}, offset: $offset, limit: $limit) {\n            id\n            assay_date\n            report_type\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

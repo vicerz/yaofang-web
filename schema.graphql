@@ -6752,16 +6752,16 @@ type medication_reminders {
   id: uuid!
 
   """生产厂家"""
-  manufacturer: String!
+  manufacturer: String
   name: String!
   phone_number: String
 
   """提醒时间数组"""
   reminder_times: [String!]!
-  spec: String!
+  spec: String
 
   """用法用量"""
-  usage_dosage: String!
+  usage_dosage: String
   user_id: String!
 }
 

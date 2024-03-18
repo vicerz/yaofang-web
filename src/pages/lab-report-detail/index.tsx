@@ -33,6 +33,34 @@ function Index() {
     });
     const [,deleteRecord] = useMutation(DeleteLabReportRecordMutationDocument);
 
+    // 化验报告类型，1：血常规、2：尿常规、3：大便常规、4：肠胃镜报告、5：病理报告、6：其他
+    const reportTypeOptions = [
+        {
+            value: 1,
+            text: '血常规'
+        },
+        {
+            value: 2,
+            text: '尿常规'
+        },
+        {
+            value: 3,
+            text: '大便常规'
+        },
+        {
+            value: 4,
+            text: '肠胃镜报告'
+        },
+        {
+            value: 5,
+            text: '病理报告'
+        },
+        {
+            value: 6,
+            text: '其他'
+        },
+    ];
+
     const onDeleteRecord = () => {
         Taro.showModal({
             title: '删除记录',
@@ -53,6 +81,9 @@ function Index() {
 
     return (
         <View className='flex flex-col px-40px pt-80px'>
+            <SharpItem title='报告单类型'>
+                <TaroText className='text-30px fw-600 c-black'>{reportTypeOptions.find(item => item.value === data?.lab_report_records_by_pk?.report_type)?.text}</TaroText>
+            </SharpItem>
             <SharpItem title='化验时间'>
                 <TaroText className='text-30px fw-600 c-black'>{dayjs(data?.lab_report_records_by_pk?.assay_date).format('YYYY-MM-DD')}</TaroText>
             </SharpItem>

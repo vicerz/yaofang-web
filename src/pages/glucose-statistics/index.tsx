@@ -189,43 +189,36 @@ function Index() {
             key: '1',
             title: '早餐前',
             align: 'center',
-            width: 34,
         },
         {
             key: '2',
             title: '早餐后',
             align: 'center',
-            width: 34,
         },
         {
             key: '3',
             title: '午餐前',
             align: 'center',
-            width: 34,
         },
         {
             key: '4',
             title: '午餐后',
             align: 'center',
-            width: 34,
         },
         {
             key: '5',
             title: '晚餐前',
             align: 'center',
-            width: 34,
         },
         {
             key: '6',
             title: '晚餐后',
             align: 'center',
-            width: 34,
         },
         {
             key: '7',
             title: '其他',
             align: 'center',
-            width: 34,
         },
     ];
     const measurementPeriodList = [
@@ -269,9 +262,9 @@ function Index() {
             const newTableData: any[] = [];
             const dateRangeDays = dayjs(tableDateRange[1]).diff(tableDateRange[0], 'day');
             for (let i = 0; i <= dateRangeDays; i++) {
-                const date = dayjs(tableDateRange[0]).add(i, 'day').format('YYYY.MM.DD');
+                const date = dayjs(tableDateRange[0]).add(i, 'day').format('YYYY-MM-DD');
                 const glucoseRecords = glucoseRecordsData.glucose_records.filter(record => {
-                    return dayjs(record.record_time).format('YYYY.MM.DD') === date;
+                    return dayjs(record.record_time).format('YYYY-MM-DD') === date;
                 });
                 const rowData = {
                     date,
@@ -281,7 +274,6 @@ function Index() {
                 });
                 newTableData.push(rowData);
             }
-            console.log('tableData:', newTableData);
             setTableData(newTableData);
         }
     }, [glucoseRecordsData]);
