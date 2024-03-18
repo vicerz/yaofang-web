@@ -117,6 +117,7 @@ function Index() {
                                 align='right'
                                 type='number'
                                 placeholder='mmHg'
+                                formatter={(value) => Math.min(Number(value), 250)}
                             />
                         </NutForm.Item>
                         <NutForm.Item
@@ -128,6 +129,7 @@ function Index() {
                                 align='right'
                                 type='number'
                                 placeholder='mmHg'
+                                formatter={(value) => Math.min(Number(value), 140)}
                             />
                         </NutForm.Item>
                         <NutForm.Item

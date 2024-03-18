@@ -194,6 +194,7 @@ function Index() {
                             type='number'
                             maxLength={11}
                             align='right'
+                            readOnly={form.getFieldValue('primary_phone') !== ''}
                             onClick={() => {
                                 setPhoneNumber('');
                                 setCaptcha('');
@@ -202,7 +203,20 @@ function Index() {
                             }}
                         />
                     </NutForm.Item>
-                    <TaroText className='text-30px c-primary'>个人信息</TaroText>
+                    {form.getFieldValue('primary_phone') && (
+                        <View
+                            className='flex justify-end pr-40px'
+                            onClick={() => {
+                                setPhoneNumber('');
+                                setCaptcha('');
+                                setIsCountDown(false);
+                                setBindPhoneVisible(true);
+                            }}
+                        >
+                            <TaroText className='text-24px c-#999999'>更换手机号</TaroText>
+                        </View>
+                    )}
+                    <TaroText className='text-30px c-primary mt-20px'>个人信息</TaroText>
                     <NutForm.Item
                         name='realName'
                         label='姓名'

@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro';
 
 import './index.scss';
 import { useLogto } from '@logto/react';
+import dayjs from 'dayjs';
 
 const InsertMedicationReminderMutationDocument = graphql(`
     mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {
@@ -38,6 +39,17 @@ function Index() {
             { text: '10', value: 10 },
         ],
     ];
+
+    const getDefaultDate = () => {
+        const now = new Date();
+        const [hour, minute] = reminderTimes[currentReminderIndex].split(':');
+        if (hour === undefined || minute === undefined) {
+            return now;
+        }
+        now.setHours(Number(hour));
+        now.setMinutes(Number(minute));
+        return now;
+    };
 
     const save = async (values) => {
         if (!dosesPerDay) {
@@ -193,18 +205,20 @@ function Index() {
                 onClose={() => setCountPikerVisible(false)}
             />
 
-            <NutDatePicker
-                type='hour-minutes'
-                defaultValue={new Date()}
-                visible={timePickerVisible}
-                onClose={() => setTimePickerVisible(false)}
-                onConfirm={(options, values: string[]) => {
-                    const newReminderTimes = [...reminderTimes];
-                    newReminderTimes[currentReminderIndex] = values.join(':');
-                    setReminderTimes(newReminderTimes);
-                    setTimePickerVisible(false);
-                }}
-            />
+            {timePickerVisible && (
+                <NutDatePicker
+                    type='hour-minutes'
+                    defaultValue={getDefaultDate()}
+                    visible={timePickerVisible}
+                    onClose={() => setTimePickerVisible(false)}
+                    onConfirm={(options, values: string[]) => {
+                        const newReminderTimes = [...reminderTimes];
+                        newReminderTimes[currentReminderIndex] = values.join(':');
+                        setReminderTimes(newReminderTimes);
+                        setTimePickerVisible(false);
+                    }}
+                />
+            )}
         </>
     );
 }
