@@ -39,13 +39,13 @@ function Index() {
 
     const [,update] = useMutation(UpdateUserInfoMutationDocument);
     const [, insertSmsCode] = useMutation(InsertSmsCodeMutationDocument);
-    const [{ data: smsCodeData }] = useQuery({
+    const [{ data: smsCodeData }, fetchSmsCodeData] = useQuery({
         query: SmsCodeQueryDocument,
         variables: {
             phone_number: phoneNumber,
             captcha: captcha,
         },
-        pause: !phoneNumber || !captcha,
+        pause: true,
     });
 
     const save = (values: any) => {
@@ -113,7 +113,7 @@ function Index() {
         });
     };
 
-    const verifyCaptcha = () => {
+    const verifyCaptcha = async () => {
         if (!captcha) {
             Taro.showToast({
                 title: '请输入短信验证码',
@@ -133,6 +133,12 @@ function Index() {
         });
         setBindPhoneVisible(false);
     };
+
+    useEffect(() => {
+        if (smsCodeData) {
+            verifyCaptcha();
+        }
+    }, [smsCodeData]);
 
     useEffect(() => {
         Taro.showLoading({
@@ -290,7 +296,7 @@ function Index() {
             <NutDialog
                 title='绑定手机号'
                 visible={bindPhoneVisible}
-                onConfirm={verifyCaptcha}
+                onConfirm={fetchSmsCodeData}
                 onCancel={() => setBindPhoneVisible(false)}
             >
                 <View className='mt-20px'>
