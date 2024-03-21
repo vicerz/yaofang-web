@@ -1,8 +1,7 @@
 import Taro from '@tarojs/taro';
+import { useLogto } from '@logto/react';
 
 import './index.scss';
-import { useLogto } from '@logto/react';
-import dayjs from 'dayjs';
 
 const InsertMedicationReminderMutationDocument = graphql(`
     mutation InsertMedicationReminderMutation($object: medication_reminders_insert_input!) {
@@ -13,7 +12,7 @@ const InsertMedicationReminderMutationDocument = graphql(`
 `);
 
 function Index() {
-    const { getIdTokenClaims } = useLogto();
+    const { fetchUserInfo } = useLogto();
 
     const [countPikerVisible, setCountPikerVisible] = useState(false);
     const [timePickerVisible, setTimePickerVisible] = useState(false);
@@ -68,7 +67,7 @@ function Index() {
             return;
         }
 
-        const userInfo = await getIdTokenClaims();
+        const userInfo = await fetchUserInfo();
 
         insertMedicationReminder({
             object: {

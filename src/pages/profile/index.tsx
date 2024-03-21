@@ -26,6 +26,14 @@ const SmsCodeQueryDocument = graphql(`
     }
 `);
 
+const DeleteMedicationRemindersMutationDocument = graphql(`
+    mutation DeleteMedicationReminders {
+        delete_medication_reminders(where: {}) {
+            affected_rows
+        }
+    }
+`);
+
 function Index() {
     const [form] = NutForm.useForm();
     const { fetchUserInfo } = useLogto();
@@ -39,6 +47,7 @@ function Index() {
 
     const [,update] = useMutation(UpdateUserInfoMutationDocument);
     const [, insertSmsCode] = useMutation(InsertSmsCodeMutationDocument);
+    const [, deleteMedicationReminders] = useMutation(DeleteMedicationRemindersMutationDocument);
     const [{ data: smsCodeData }, fetchSmsCodeData] = useQuery({
         query: SmsCodeQueryDocument,
         variables: {
@@ -53,6 +62,7 @@ function Index() {
             return;
         }
         const { avatar, name, primary_phone, ...custom_data } = values;
+
         update({
             id: userInfo.sub,
             object: {
@@ -61,13 +71,16 @@ function Index() {
                 primary_phone: primary_phone,
                 custom_data,
             }
-        }).then(({ error }) => {
+        }).then(async ({ error }) => {
             if (error) {
                 Taro.showToast({
                     title: '保存失败',
                     icon: 'none',
                 });
             } else {
+                if (primary_phone !== userInfo?.phone_number) {
+                    await deleteMedicationReminders({});
+                }
                 Taro.showToast({
                     title: '保存成功',
                     icon: 'success',
@@ -114,13 +127,6 @@ function Index() {
     };
 
     const verifyCaptcha = async () => {
-        if (!captcha) {
-            Taro.showToast({
-                title: '请输入短信验证码',
-                icon: 'none',
-            });
-            return;
-        }
         if (smsCodeData?.sms_codes?.length === 0) {
             Taro.showToast({
                 title: '验证码错误',
@@ -213,10 +219,21 @@ function Index() {
                         <View
                             className='flex justify-end pr-40px'
                             onClick={() => {
-                                setPhoneNumber('');
-                                setCaptcha('');
-                                setIsCountDown(false);
-                                setBindPhoneVisible(true);
+                                Taro.showModal({
+                                    title: '提示',
+                                    content: '更换手机号后已经添加的用药提醒将全部被删除，请重新添加',
+                                    confirmText: '确定',
+                                    confirmColor: '#EC6400',
+                                    cancelText: '取消',
+                                    success: (res) => {
+                                        if (res.confirm) {
+                                            setPhoneNumber('');
+                                            setCaptcha('');
+                                            setIsCountDown(false);
+                                            setBindPhoneVisible(true);
+                                        }
+                                    }
+                                });
                             }}
                         >
                             <TaroText className='text-24px c-#999999'>更换手机号</TaroText>
@@ -296,7 +313,16 @@ function Index() {
             <NutDialog
                 title='绑定手机号'
                 visible={bindPhoneVisible}
-                onConfirm={fetchSmsCodeData}
+                onConfirm={() => {
+                    if (!captcha) {
+                        Taro.showToast({
+                            title: '请输入短信验证码',
+                            icon: 'none',
+                        });
+                        return;
+                    }
+                    fetchSmsCodeData();
+                }}
                 onCancel={() => setBindPhoneVisible(false)}
             >
                 <View className='mt-20px'>

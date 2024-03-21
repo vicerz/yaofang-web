@@ -56,6 +56,7 @@ const documents = {
     "\n    mutation UpdateUserInfoMutation($id: String!, $object: users_set_input!) {\n        update_users_by_pk(pk_columns: {id: $id}, _set: $object) {\n            id\n        }\n    }\n": types.UpdateUserInfoMutationDocument,
     "\n    mutation InsertSmsCodeMutation($object: sms_codes_insert_input!) {\n        insert_sms_codes_one(object: $object) {\n            created_at\n        }\n    }\n": types.InsertSmsCodeMutationDocument,
     "\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n": types.SmsCodeQueryDocument,
+    "\n    mutation DeleteMedicationReminders {\n        delete_medication_reminders(where: {}) {\n            affected_rows\n        }\n    }\n": types.DeleteMedicationRemindersDocument,
 };
 
 /**
@@ -244,6 +245,10 @@ export function graphql(source: "\n    mutation InsertSmsCodeMutation($object: s
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n"): (typeof documents)["\n    query SmsCodeQuery($phone_number: String!, $captcha: String!) {\n        sms_codes(where: {phone_number: {_eq: $phone_number}, captcha: {_eq: $captcha}}, order_by: {created_at: desc}, limit: 1) {\n            id\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation DeleteMedicationReminders {\n        delete_medication_reminders(where: {}) {\n            affected_rows\n        }\n    }\n"): (typeof documents)["\n    mutation DeleteMedicationReminders {\n        delete_medication_reminders(where: {}) {\n            affected_rows\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
