@@ -24,6 +24,7 @@ const DeleteLabReportRecordMutationDocument = graphql(`
 
 function Index() {
     const { id } = Router.getParams();
+    const [previewIndex, setPreviewIndex] = useState(0);
 
     const [{ data }] = useQuery({
         query: LabReportRecordDetailQueryDocument,
@@ -80,41 +81,54 @@ function Index() {
     };
 
     return (
-        <View className='flex flex-col px-40px pt-80px'>
-            <SharpItem title='报告单类型'>
-                <TaroText className='text-30px fw-600 c-black'>{reportTypeOptions.find(item => item.value === data?.lab_report_records_by_pk?.report_type)?.text}</TaroText>
-            </SharpItem>
-            <SharpItem title='化验时间'>
-                <TaroText className='text-30px fw-600 c-black'>{dayjs(data?.lab_report_records_by_pk?.assay_date).format('YYYY-MM-DD')}</TaroText>
-            </SharpItem>
-            <SharpItem title='图片'>
-                <View className='flex flex-wrap gap-20px mt-20px'>
-                    {data?.lab_report_records_by_pk?.images.map((key: string) => (
-                        <TaroImage key={key} className='w-140px h-140px rd-10px' src={process.env.TARO_APP_S3_ENDPOINT + key} />
-                    ))}
-                </View>
-            </SharpItem>
-            <SharpItem title='备注'>
-                <TaroText className='text-30px fw-600 c-black'>{data?.lab_report_records_by_pk?.remarks}</TaroText>
-            </SharpItem>
-            <View className='flex gap-30px mt-220px'>
-                <SharpButton.Outline onClick={onDeleteRecord}>
+        <>
+            <View className='flex flex-col px-40px pt-80px'>
+                <SharpItem title='报告单类型'>
+                    <TaroText className='text-30px fw-600 c-black'>{reportTypeOptions.find(item => item.value === data?.lab_report_records_by_pk?.report_type)?.text}</TaroText>
+                </SharpItem>
+                <SharpItem title='化验时间'>
+                    <TaroText className='text-30px fw-600 c-black'>{dayjs(data?.lab_report_records_by_pk?.assay_date).format('YYYY-MM-DD')}</TaroText>
+                </SharpItem>
+                <SharpItem title='图片'>
+                    <View className='flex flex-wrap gap-20px mt-20px'>
+                        {data?.lab_report_records_by_pk?.images.map((key: string, index) => (
+                            <TaroImage
+                                key={key}
+                                className='w-140px h-140px rd-10px'
+                                src={process.env.TARO_APP_S3_ENDPOINT + key}
+                                onClick={() => setPreviewIndex(index + 1)}
+                            />
+                        ))}
+                    </View>
+                </SharpItem>
+                <SharpItem title='备注'>
+                    <TaroText className='text-30px fw-600 c-black'>{data?.lab_report_records_by_pk?.remarks}</TaroText>
+                </SharpItem>
+                <View className='flex gap-30px mt-220px'>
+                    <SharpButton.Outline onClick={onDeleteRecord}>
                     删除
-                </SharpButton.Outline>
-                <SharpButton.Primary
-                    onClick={() => {
-                        Router.toLabReportRecord({
-                            params: {
-                                id,
-                            },
-                            type: NavigateType.redirectTo
-                        });
-                    }}
-                >
+                    </SharpButton.Outline>
+                    <SharpButton.Primary
+                        onClick={() => {
+                            Router.toLabReportRecord({
+                                params: {
+                                    id,
+                                },
+                                type: NavigateType.redirectTo
+                            });
+                        }}
+                    >
                     修改
-                </SharpButton.Primary>
+                    </SharpButton.Primary>
+                </View>
             </View>
-        </View>
+
+            <NutImagePreview
+                images={data?.lab_report_records_by_pk?.images.map(key => ({ src: process.env.TARO_APP_S3_ENDPOINT + key }))}
+                visible={!!previewIndex}
+                defaultValue={previewIndex}
+            />
+        </>
     );
 }
 
