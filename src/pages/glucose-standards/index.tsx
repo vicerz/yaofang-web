@@ -35,6 +35,14 @@ const UpdateUserGlucoseStandardsMutationDocument = graphql(`
     }
 `);
 
+const DeleteUserGlucoseStandardsMutationDocument = graphql(`
+    mutation DeleteUserGlucoseStandardsMutation {
+        delete_user_glucose_standards(where: {}) {
+            affected_rows
+        }
+    }
+`);
+
 function Index() {
     const [typePickerVisible, setTypePickerVisible] = useState(false);
     const [rangePopupVisible, setRangePopupVisible] = useState(false);
@@ -43,11 +51,14 @@ function Index() {
     const [currentStandard, setCurrentStandard] = useState('');
     const [userStandardValue, setUserStandardValue] = useState<any>();
 
-    const [{ data }] = useQuery({
+    const [{ data }, fetch] = useQuery({
         query: GlucoseStandardsQueryDocument,
+        pause: true,
+        requestPolicy: 'network-only',
     });
     const [, insertUserGlucoseStandards] = useMutation(InsertUserGlucoseStandardsMutationDocument);
     const [, updateUserGlucoseStandards] = useMutation(UpdateUserGlucoseStandardsMutationDocument);
+    const [, deleteUserGlucoseStandards] = useMutation(DeleteUserGlucoseStandardsMutationDocument);
 
     const typeList = [[
         {
@@ -70,10 +81,20 @@ function Index() {
     }, [data, standardType, userStandardValue]);
 
     const restUserStandardValue = useCallback(() => {
-        setUserStandardValue(data?.user_glucose_standards);
+        Taro.showModal({
+            title: '提示',
+            content: '确定要重置吗？',
+            confirmColor: '#EC6400',
+            success: async (res) => {
+                if (res.confirm) {
+                    await deleteUserGlucoseStandards({});
+                    fetch();
+                }
+            },
+        });
     }, [data]);
 
-    const save = () => {
+    const save = async () => {
         const insertData = userStandardValue?.filter((item) => !item.id).map((item) => ({
             ...item,
         }));
@@ -87,23 +108,21 @@ function Index() {
             },
         }));
 
-        Promise.all([
-            !!insertData.length && insertUserGlucoseStandards({
+        await Promise.all([
+            !!insertData.length && await insertUserGlucoseStandards({
                 objects: insertData,
             }),
-            !!updateData.length && updateUserGlucoseStandards({
+            !!updateData.length && await updateUserGlucoseStandards({
                 updates: updateData,
             }),
-        ]).then(() => {
-            Taro.showToast({
-                title: '保存成功',
-                icon: 'success',
-                duration: 2000,
-            });
-            Router.toMine({
-                type: NavigateType.redirectTo,
-            });
+        ]);
+        Taro.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
         });
+
+        Router.back();
     };
 
     useEffect(() => {
@@ -111,6 +130,10 @@ function Index() {
             setUserStandardValue(data.user_glucose_standards);
         }
     }, [data]);
+
+    useDidShow(() => {
+        fetch();
+    });
 
     return (
         <>

@@ -1,3 +1,3 @@
 export default definePageConfig({
-    navigationBarTitleText: '血压统计'
+    navigationBarTitleText: '血糖统计'
 });

@@ -35,6 +35,16 @@ const GlucoseRecordUpdateQueryDocument = graphql(`
     }
 `);
 
+const GlucoseRecordFilterQueryDocument = graphql(`
+    query GlucoseRecordFilterQuery($_gt: timestamptz!, $_lt: timestamptz!, $measurementPeriod: Int!) {
+        glucose_records(where: {record_time: {_gt: $_gt, _lt: $_lt}, measurement_period: {_eq: $measurementPeriod}}) {
+            record_time
+            measurement_period
+            id
+        }
+    }
+`);
+
 const InsertGlucoseRecordMutationDocument = graphql(`
     mutation InsertGlucoseRecordMutation($object: glucose_records_insert_input!) {
         insert_glucose_records_one(object: $object) {
@@ -231,6 +241,16 @@ function Index() {
     });
     const [, insertGlucoseRecord] = useMutation(InsertGlucoseRecordMutationDocument);
     const [, updateGlucoseRecord] = useMutation(UpdateGlucoseRecordMutationDocument);
+    const [{ data: filterData }] = useQuery({
+        query: GlucoseRecordFilterQueryDocument,
+        variables: {
+            _gt: dayjs(recordTime).format('YYYY-MM-DD'),
+            _lt: dayjs(recordTime).add(1, 'day').format('YYYY-MM-DD'),
+            measurementPeriod
+        },
+        pause: !recordTime && !measurementPeriod,
+        requestPolicy: 'network-only'
+    });
 
     const onCommonChartInit = (chart: any) => {
         chart.on('tap', () => {
@@ -304,9 +324,9 @@ function Index() {
         }
         const { __typename, ...rest } = values ?? {};
 
-        if (id) {
+        if (id || filterData?.glucose_records.length) {
             updateGlucoseRecord({
-                id,
+                id: id || filterData?.glucose_records[0].id,
                 object: {
                     record_time: new Date(recordTime).toISOString(),
                     glucose_value: glucoseValue,
@@ -436,7 +456,7 @@ function Index() {
                 </View>
             </View>
 
-            <View className='w-full pt-20px pb-60px fixed bottom-0 left-0 bg-white z-9999'>
+            <View className='w-full pt-20px pb-60px fixed bottom-0 left-0 bg-white z-2'>
                 <View className='px-40px flex gap-30px'>
 
                     <SharpButton.Outline

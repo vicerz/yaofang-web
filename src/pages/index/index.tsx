@@ -16,15 +16,18 @@ const IndexPageQueryDocument = graphql(`
             image
             link
         }
-        check_ins(order_by: {check_in_date: desc}, limit: 1) {
+        check_ins(order_by: {created_at: desc}, limit: 1) {
             check_in_date
             id
             consecutive_days
             is_continuation
+            is_first_consecutive_completed
         }
         check_in_settings(limit: 1) {
             inaugural
             following
+            inaugural_url
+            following_url
         }
     }
 `);
@@ -32,6 +35,14 @@ const IndexPageQueryDocument = graphql(`
 const CheckInMutationDocument = graphql(`
     mutation CheckInMutation($object: check_ins_insert_input!) {
         insert_check_ins_one(object: $object) {
+            id
+        }
+    }
+`);
+
+const UpdateUserCustomMutationDocument = graphql(`
+    mutation UpdateUserCustomMutation($id: String!, $object: users_set_input!) {
+        update_users_by_pk(pk_columns: {id: $id}, _set: $object) {
             id
         }
     }
@@ -48,6 +59,7 @@ function Index() {
     });
 
     const [{ data: checkInData }, checkIn] = useMutation(CheckInMutationDocument);
+    const [{ data: updateUserData }, updateUser] = useMutation(UpdateUserCustomMutationDocument);
 
     const handleCheckIn = async () => {
         const newSignInDate = new Date();
@@ -91,8 +103,12 @@ function Index() {
         if (!data?.check_ins[0]?.check_in_date) {
             return 0;
         }
-        if (!data?.check_ins[0].is_continuation && !isYesterdayCheckIn()) {
-            return data.check_ins[0].consecutive_days;
+        if (!isYesterdayCheckIn() && !dayjs(data?.check_ins[0]?.check_in_date).isSame(dayjs(), 'day')){
+            return 0;
+        }
+
+        if (dayjs(data?.check_ins[0]?.check_in_date).isSame(dayjs(), 'day')) {
+            return data?.check_ins[0]?.consecutive_days;
         }
 
         if ((!data?.check_ins[0].is_continuation && isYesterdayCheckIn()) || data?.check_ins[0].is_continuation) {
@@ -112,9 +128,45 @@ function Index() {
         return false;
     };
 
-    const handleReceiveCoupon = () => {
+    const handleReceiveCoupon = async () => {
         // 领取福利券后，更新用户信息，标记首次连续签到已完成，重置连续签到天数
-        // TODO: 领取福利券
+        const userCheckInData = data?.check_ins[0];
+        if ((userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted) {
+            if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.following) {
+                // 领取福利券
+                await checkIn({
+                    object: {
+                        check_in_date: dayjs().format('YYYY-MM-DD'),
+                        consecutive_days: 0,
+                        is_continuation: false,
+                    },
+                });
+                window.location.href = data?.check_in_settings[0]?.following_url || '';
+            }
+        } else {
+            if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
+                // 领取福利券
+                await checkIn({
+                    object: {
+                        check_in_date: dayjs().format('YYYY-MM-DD'),
+                        consecutive_days: 0,
+                        is_continuation: false,
+                        is_first_consecutive_completed: true,
+                    },
+                });
+                await updateUser({
+                    id: userInfo!.sub,
+                    object: {
+                        custom_data: {
+                            ...userInfo?.custom_data || {},
+                            firstConsecutiveCompleted: true,
+                        },
+                    },
+                });
+                fetchUserInfo().then(setUserInfo);
+                window.location.href = data?.check_in_settings[0]?.inaugural_url || '';
+            }
+        }
     };
 
     const generateCheckInList = () => {
@@ -159,7 +211,7 @@ function Index() {
                             <TaroImage className='w-full h-full' src={item.image}
                                 onClick={() => {
                                     if (item.link) {
-                                        Taro.navigateTo({url: item.link});
+                                        window.location.href = item.link;
                                     }
                                 }}
                             />

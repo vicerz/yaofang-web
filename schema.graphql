@@ -2309,10 +2309,14 @@ type check_in_settings_variance_fields {
 type check_ins {
   check_in_date: date!
   consecutive_days: Int!
+  created_at: timestamptz
   id: uuid!
 
   """是否连续签到"""
   is_continuation: Boolean!
+
+  """是否完成首次连续签到"""
+  is_first_consecutive_completed: Boolean
   user_id: String!
 }
 
@@ -2355,8 +2359,10 @@ input check_ins_bool_exp {
   _or: [check_ins_bool_exp!]
   check_in_date: date_comparison_exp
   consecutive_days: Int_comparison_exp
+  created_at: timestamptz_comparison_exp
   id: uuid_comparison_exp
   is_continuation: Boolean_comparison_exp
+  is_first_consecutive_completed: Boolean_comparison_exp
   user_id: String_comparison_exp
 }
 
@@ -2388,10 +2394,14 @@ input type for inserting data into table "check_ins"
 input check_ins_insert_input {
   check_in_date: date
   consecutive_days: Int
+  created_at: timestamptz
   id: uuid
 
   """是否连续签到"""
   is_continuation: Boolean
+
+  """是否完成首次连续签到"""
+  is_first_consecutive_completed: Boolean
   user_id: String
 }
 
@@ -2399,6 +2409,7 @@ input check_ins_insert_input {
 type check_ins_max_fields {
   check_in_date: date
   consecutive_days: Int
+  created_at: timestamptz
   id: uuid
   user_id: String
 }
@@ -2407,6 +2418,7 @@ type check_ins_max_fields {
 type check_ins_min_fields {
   check_in_date: date
   consecutive_days: Int
+  created_at: timestamptz
   id: uuid
   user_id: String
 }
@@ -2435,8 +2447,10 @@ input check_ins_on_conflict {
 input check_ins_order_by {
   check_in_date: order_by
   consecutive_days: order_by
+  created_at: order_by
   id: order_by
   is_continuation: order_by
+  is_first_consecutive_completed: order_by
   user_id: order_by
 }
 
@@ -2456,10 +2470,16 @@ enum check_ins_select_column {
   consecutive_days
 
   """column name"""
+  created_at
+
+  """column name"""
   id
 
   """column name"""
   is_continuation
+
+  """column name"""
+  is_first_consecutive_completed
 
   """column name"""
   user_id
@@ -2471,10 +2491,14 @@ input type for updating data in table "check_ins"
 input check_ins_set_input {
   check_in_date: date
   consecutive_days: Int
+  created_at: timestamptz
   id: uuid
 
   """是否连续签到"""
   is_continuation: Boolean
+
+  """是否完成首次连续签到"""
+  is_first_consecutive_completed: Boolean
   user_id: String
 }
 
@@ -2508,10 +2532,14 @@ input check_ins_stream_cursor_input {
 input check_ins_stream_cursor_value_input {
   check_in_date: date
   consecutive_days: Int
+  created_at: timestamptz
   id: uuid
 
   """是否连续签到"""
   is_continuation: Boolean
+
+  """是否完成首次连续签到"""
+  is_first_consecutive_completed: Boolean
   user_id: String
 }
 
@@ -2531,10 +2559,16 @@ enum check_ins_update_column {
   consecutive_days
 
   """column name"""
+  created_at
+
+  """column name"""
   id
 
   """column name"""
   is_continuation
+
+  """column name"""
+  is_first_consecutive_completed
 
   """column name"""
   user_id
