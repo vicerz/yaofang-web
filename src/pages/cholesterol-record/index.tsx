@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro';
 import './index.scss';
 
 const CholesterolRecordOneQueryDocument = graphql(`
-    query CholesterolRecordDetailQuery($id: uuid!) {
+    query CholesterolRecordOneQuery($id: uuid!) {
         cholesterol_records_by_pk(id: $id) {
             diastolic_pressure
             medication_record
@@ -12,6 +12,16 @@ const CholesterolRecordOneQueryDocument = graphql(`
             remarks
             symptoms
             systolic_pressure
+        }
+    }
+`);
+
+const CholesterolRecordFilterQueryDocument = graphql(`
+    query CholesterolRecordFilterQuery($_gt: timestamptz!, $_lt: timestamptz!, $measurementPeriod: Int!) {
+        cholesterol_records(where: {record_time: {_gt: $_gt, _lt: $_lt}, measurement_period: {_eq: $measurementPeriod}}) {
+            record_time
+            measurement_period
+            id
         }
     }
 `);
@@ -37,7 +47,9 @@ function Index() {
     const { id } = Router.getParams();
 
     const [datePickerVisible, setDatePickerVisible] = useState(false);
+    const [measurementPeriodVisible, setMeasurementPeriodVisible] = useState(false);
     const [recordTime, setRecordTime] = useState(new Date().getTime());
+    const [measurementPeriod, setMeasurementPeriod] = useState(1);
 
     const [{data: updateData}] = useQuery({
         query: CholesterolRecordOneQueryDocument,
@@ -46,21 +58,54 @@ function Index() {
         },
         pause: !id,
     });
+    const [{ data: filterData }] = useQuery({
+        query: CholesterolRecordFilterQueryDocument,
+        variables: {
+            _gt: dayjs(recordTime).format('YYYY-MM-DD'),
+            _lt: dayjs(recordTime).add(1, 'day').format('YYYY-MM-DD'),
+            measurementPeriod
+        },
+        pause: !recordTime && !measurementPeriod,
+        requestPolicy: 'network-only'
+    });
     const [, insertRecord] = useMutation(InsertCholesterolRecordOneMutationDocument);
     const [, updateRecord] = useMutation(UpdateCholesterolRecordOneMutationDocument);
 
+    const measurementPeriodList = [
+        [
+            { text: '上午', value: '1' },
+            { text: '中午', value: '2' },
+            { text: '下午', value: '3' },
+            { text: '睡前', value: '4' },
+        ]
+    ];
 
-    const save = (values) => {
+    const getMeasurementPeriodText = () => {
+        return measurementPeriodList[0].find((item) => item.value === String(measurementPeriod))?.text;
+    };
+
+    const save = async (values) => {
         const { __typename, ...rest } = values;
 
-        if (id) {
+        if (filterData?.cholesterol_records.length) {
+            const confirm = await Taro.showModal({
+                title: '重复记录',
+                confirmColor: '#EC6400',
+                content: '已经存在相同时段记录，是否要覆盖？'
+            });
+            if (confirm.cancel) {
+                return;
+            }
+        }
+
+        if (id || filterData?.cholesterol_records.length) {
             // 如果有ID，则执行更新操作
-            updateRecord({ id, object: rest }).then(({ data, error }) => {
+            updateRecord({ id: id || filterData?.cholesterol_records[0].id, object: { ...rest, measurement_period: measurementPeriod,} }).then(({ data, error }) => {
                 handleResult(data, error);
             });
         } else {
             // 如果没有ID，则执行插入操作
-            insertRecord({ object: rest }).then(({ data, error }) => {
+            insertRecord({ object: { ...rest, measurement_period: measurementPeriod,} }).then(({ data, error }) => {
                 handleResult(data, error);
             });
         }
@@ -82,9 +127,26 @@ function Index() {
 
             // 跳转到详细页面
             const recordId = data?.update_cholesterol_records_by_pk?.id || data?.insert_cholesterol_records_one?.id;
-            Router.toCholesterolRecordDetail({ params: { id: recordId } });
+            Router.toCholesterolRecordDetail({
+                params: { id: recordId },
+                type: NavigateType.redirectTo,
+            });
         }
     };
+
+    useEffect(() => {
+        // 根据 recordTime 设置 measurementPeriod
+        const hour = dayjs(recordTime).hour();
+        if (hour >= 6 && hour < 11) {
+            setMeasurementPeriod(1);
+        } else if (hour >= 11 && hour < 14) {
+            setMeasurementPeriod(2);
+        } else if (hour >= 14 && hour < 18) {
+            setMeasurementPeriod(3);
+        } else {
+            setMeasurementPeriod(4);
+        }
+    }, [recordTime]);
 
     useEffect(() => {
         if (updateData?.cholesterol_records_by_pk) {
@@ -169,6 +231,21 @@ function Index() {
                             </View>
                         </NutForm.Item>
                         <NutForm.Item
+                            name='glucose_value'
+                            label='测量时段'
+                            required
+                        >
+                            <View
+                                className='flex justify-end items-center gap-10px'
+                                onClick={() => setMeasurementPeriodVisible(true)}
+                            >
+                                <TaroText className='c-primary text-30px fw-600'>{
+                                    getMeasurementPeriodText()
+                                }</TaroText>
+                                <NutIconArrowSize8 color='#B3BAC5' />
+                            </View>
+                        </NutForm.Item>
+                        <NutForm.Item
                             name='medication_record'
                             label='用药'
                         >
@@ -207,6 +284,17 @@ function Index() {
                     form.setFieldsValue({ record_time: dayjs(`${year}-${month}-${day} ${hour}:${minute}`).toISOString() });
                     setDatePickerVisible(false);
                 }}
+            />
+
+            <NutPicker
+                visible={measurementPeriodVisible}
+                options={measurementPeriodList}
+                defaultValue={[measurementPeriod]}
+                onConfirm={(list, values) => {
+                    setMeasurementPeriod(Number(values[0]));
+                    setMeasurementPeriodVisible(false);
+                }}
+                onClose={() => setMeasurementPeriodVisible(false)}
             />
         </>
     );

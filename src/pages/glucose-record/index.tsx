@@ -314,7 +314,7 @@ function Index() {
         }
     };
 
-    const save = (values) => {
+    const save = async (values) => {
         if (!glucoseValue || glucoseValue === '0.0') {
             Taro.showToast({
                 title: '请填写血糖值',
@@ -323,6 +323,17 @@ function Index() {
             return;
         }
         const { __typename, ...rest } = values ?? {};
+
+        if (filterData?.glucose_records.length) {
+            const confirm = await Taro.showModal({
+                title: '重复记录',
+                confirmColor: '#EC6400',
+                content: '已经存在相同时段记录，是否要覆盖？'
+            });
+            if (confirm.cancel) {
+                return;
+            }
+        }
 
         if (id || filterData?.glucose_records.length) {
             updateGlucoseRecord({
@@ -365,7 +376,8 @@ function Index() {
             Router.toGlucoseRecordDetail({
                 params: {
                     id: recordId,
-                }
+                },
+                type: NavigateType.redirectTo,
             });
         }
     };

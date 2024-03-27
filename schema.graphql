@@ -2613,6 +2613,9 @@ type cholesterol_records {
   """
   is_exception: Boolean
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """用药记录"""
   medication_record: String
 
@@ -2681,6 +2684,9 @@ type cholesterol_records_avg_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
+
   """脉搏（心率）"""
   pulse_rate: Float
 
@@ -2699,6 +2705,7 @@ input cholesterol_records_bool_exp {
   diastolic_pressure: numeric_comparison_exp
   id: uuid_comparison_exp
   is_exception: Boolean_comparison_exp
+  measurement_period: Int_comparison_exp
   medication_record: String_comparison_exp
   pulse_rate: numeric_comparison_exp
   record_time: timestamptz_comparison_exp
@@ -2757,6 +2764,9 @@ input cholesterol_records_inc_input {
   """舒张压（低压）"""
   diastolic_pressure: numeric
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """脉搏（心率）"""
   pulse_rate: numeric
 
@@ -2773,6 +2783,9 @@ input cholesterol_records_insert_input {
   """舒张压（低压）"""
   diastolic_pressure: numeric
   id: uuid
+
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
 
   """用药记录"""
   medication_record: String
@@ -2801,6 +2814,9 @@ type cholesterol_records_max_fields {
   diastolic_pressure: numeric
   id: uuid
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """用药记录"""
   medication_record: String
 
@@ -2824,6 +2840,9 @@ type cholesterol_records_min_fields {
   """舒张压（低压）"""
   diastolic_pressure: numeric
   id: uuid
+
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
 
   """用药记录"""
   medication_record: String
@@ -2867,6 +2886,7 @@ input cholesterol_records_order_by {
   diastolic_pressure: order_by
   id: order_by
   is_exception: order_by
+  measurement_period: order_by
   medication_record: order_by
   pulse_rate: order_by
   record_time: order_by
@@ -2904,6 +2924,9 @@ enum cholesterol_records_select_column {
   id
 
   """column name"""
+  measurement_period
+
+  """column name"""
   medication_record
 
   """column name"""
@@ -2938,6 +2961,9 @@ input cholesterol_records_set_input {
   diastolic_pressure: numeric
   id: uuid
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """用药记录"""
   medication_record: String
 
@@ -2962,6 +2988,9 @@ type cholesterol_records_stddev_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
+
   """脉搏（心率）"""
   pulse_rate: Float
 
@@ -2974,6 +3003,9 @@ type cholesterol_records_stddev_pop_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
+
   """脉搏（心率）"""
   pulse_rate: Float
 
@@ -2985,6 +3017,9 @@ type cholesterol_records_stddev_pop_fields {
 type cholesterol_records_stddev_samp_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
+
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
 
   """脉搏（心率）"""
   pulse_rate: Float
@@ -3012,6 +3047,9 @@ input cholesterol_records_stream_cursor_value_input {
   diastolic_pressure: numeric
   id: uuid
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """用药记录"""
   medication_record: String
 
@@ -3036,6 +3074,9 @@ type cholesterol_records_sum_fields {
   """舒张压（低压）"""
   diastolic_pressure: numeric
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Int
+
   """脉搏（心率）"""
   pulse_rate: numeric
 
@@ -3055,6 +3096,9 @@ enum cholesterol_records_update_column {
 
   """column name"""
   id
+
+  """column name"""
+  measurement_period
 
   """column name"""
   medication_record
@@ -3118,6 +3162,9 @@ type cholesterol_records_var_pop_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
+
   """脉搏（心率）"""
   pulse_rate: Float
 
@@ -3130,6 +3177,9 @@ type cholesterol_records_var_samp_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
 
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
+
   """脉搏（心率）"""
   pulse_rate: Float
 
@@ -3141,6 +3191,9 @@ type cholesterol_records_var_samp_fields {
 type cholesterol_records_variance_fields {
   """舒张压（低压）"""
   diastolic_pressure: Float
+
+  """测量时段，1：上午、2：中午、3：下午、4：睡前"""
+  measurement_period: Float
 
   """脉搏（心率）"""
   pulse_rate: Float

@@ -328,6 +328,7 @@ function Index() {
                     </SharpButton.Primary>
                 </View>
             </View>
+            <SharpFixedNav />
         </>
     );
 }

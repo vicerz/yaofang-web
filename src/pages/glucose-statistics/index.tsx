@@ -170,12 +170,12 @@ function Index() {
             }
         },
     });
-    const tableColumns: TableColumnProps[] = [
+    const tableColumns: any[] = [
         {
             key: 'date',
             title: '时间',
             align: 'center',
-            width: 34,
+            fixed: 'left',
             render: (rowData) => {
                 return (
                     <View className='flex flex-col items-center justify-between'>

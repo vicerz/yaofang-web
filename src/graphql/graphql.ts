@@ -2205,6 +2205,8 @@ export type Cholesterol_Records = {
   id: Scalars['uuid']['output'];
   /** A computed field, executes function "calculate_cholesterol_exception" */
   is_exception?: Maybe<Scalars['Boolean']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Int']['output']>;
   /** 用药记录 */
   medication_record?: Maybe<Scalars['String']['output']>;
   /** 脉搏（心率） */
@@ -2268,6 +2270,8 @@ export type Cholesterol_Records_Append_Input = {
 export type Cholesterol_Records_Avg_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2283,6 +2287,7 @@ export type Cholesterol_Records_Bool_Exp = {
   diastolic_pressure?: InputMaybe<Numeric_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_exception?: InputMaybe<Boolean_Comparison_Exp>;
+  measurement_period?: InputMaybe<Int_Comparison_Exp>;
   medication_record?: InputMaybe<String_Comparison_Exp>;
   pulse_rate?: InputMaybe<Numeric_Comparison_Exp>;
   record_time?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -2325,6 +2330,8 @@ export type Cholesterol_Records_Delete_Key_Input = {
 export type Cholesterol_Records_Inc_Input = {
   /** 舒张压（低压） */
   diastolic_pressure?: InputMaybe<Scalars['numeric']['input']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: InputMaybe<Scalars['Int']['input']>;
   /** 脉搏（心率） */
   pulse_rate?: InputMaybe<Scalars['numeric']['input']>;
   /** 收缩压（高压） */
@@ -2337,6 +2344,8 @@ export type Cholesterol_Records_Insert_Input = {
   /** 舒张压（低压） */
   diastolic_pressure?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: InputMaybe<Scalars['Int']['input']>;
   /** 用药记录 */
   medication_record?: InputMaybe<Scalars['String']['input']>;
   /** 脉搏（心率） */
@@ -2358,6 +2367,8 @@ export type Cholesterol_Records_Max_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Int']['output']>;
   /** 用药记录 */
   medication_record?: Maybe<Scalars['String']['output']>;
   /** 脉搏（心率） */
@@ -2377,6 +2388,8 @@ export type Cholesterol_Records_Min_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Int']['output']>;
   /** 用药记录 */
   medication_record?: Maybe<Scalars['String']['output']>;
   /** 脉搏（心率） */
@@ -2411,6 +2424,7 @@ export type Cholesterol_Records_Order_By = {
   diastolic_pressure?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_exception?: InputMaybe<Order_By>;
+  measurement_period?: InputMaybe<Order_By>;
   medication_record?: InputMaybe<Order_By>;
   pulse_rate?: InputMaybe<Order_By>;
   record_time?: InputMaybe<Order_By>;
@@ -2443,6 +2457,8 @@ export enum Cholesterol_Records_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  MeasurementPeriod = 'measurement_period',
+  /** column name */
   MedicationRecord = 'medication_record',
   /** column name */
   PulseRate = 'pulse_rate',
@@ -2466,6 +2482,8 @@ export type Cholesterol_Records_Set_Input = {
   /** 舒张压（低压） */
   diastolic_pressure?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: InputMaybe<Scalars['Int']['input']>;
   /** 用药记录 */
   medication_record?: InputMaybe<Scalars['String']['input']>;
   /** 脉搏（心率） */
@@ -2485,6 +2503,8 @@ export type Cholesterol_Records_Set_Input = {
 export type Cholesterol_Records_Stddev_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2495,6 +2515,8 @@ export type Cholesterol_Records_Stddev_Fields = {
 export type Cholesterol_Records_Stddev_Pop_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2505,6 +2527,8 @@ export type Cholesterol_Records_Stddev_Pop_Fields = {
 export type Cholesterol_Records_Stddev_Samp_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2525,6 +2549,8 @@ export type Cholesterol_Records_Stream_Cursor_Value_Input = {
   /** 舒张压（低压） */
   diastolic_pressure?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: InputMaybe<Scalars['Int']['input']>;
   /** 用药记录 */
   medication_record?: InputMaybe<Scalars['String']['input']>;
   /** 脉搏（心率） */
@@ -2544,6 +2570,8 @@ export type Cholesterol_Records_Stream_Cursor_Value_Input = {
 export type Cholesterol_Records_Sum_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['numeric']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Int']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['numeric']['output']>;
   /** 收缩压（高压） */
@@ -2558,6 +2586,8 @@ export enum Cholesterol_Records_Update_Column {
   DiastolicPressure = 'diastolic_pressure',
   /** column name */
   Id = 'id',
+  /** column name */
+  MeasurementPeriod = 'measurement_period',
   /** column name */
   MedicationRecord = 'medication_record',
   /** column name */
@@ -2599,6 +2629,8 @@ export type Cholesterol_Records_Updates = {
 export type Cholesterol_Records_Var_Pop_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2609,6 +2641,8 @@ export type Cholesterol_Records_Var_Pop_Fields = {
 export type Cholesterol_Records_Var_Samp_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -2619,6 +2653,8 @@ export type Cholesterol_Records_Var_Samp_Fields = {
 export type Cholesterol_Records_Variance_Fields = {
   /** 舒张压（低压） */
   diastolic_pressure?: Maybe<Scalars['Float']['output']>;
+  /** 测量时段，1：上午、2：中午、3：下午、4：睡前 */
+  measurement_period?: Maybe<Scalars['Float']['output']>;
   /** 脉搏（心率） */
   pulse_rate?: Maybe<Scalars['Float']['output']>;
   /** 收缩压（高压） */
@@ -19948,7 +19984,7 @@ export type CholesterolRecordDetailQueryQueryVariables = Exact<{
 }>;
 
 
-export type CholesterolRecordDetailQueryQuery = { cholesterol_records_by_pk?: { diastolic_pressure: any, medication_record?: string | null, pulse_rate: any, record_time: any, remarks?: string | null, symptoms?: any | null, systolic_pressure: any } | null };
+export type CholesterolRecordDetailQueryQuery = { cholesterol_records_by_pk?: { diastolic_pressure: any, medication_record?: string | null, pulse_rate: any, record_time: any, remarks?: string | null, symptoms?: any | null, systolic_pressure: any, measurement_period?: number | null } | null };
 
 export type DeleteCholesterolRecordMutationMutationVariables = Exact<{
   id: Scalars['uuid']['input'];
@@ -19964,6 +20000,22 @@ export type CholesterolRecordListQueryQueryVariables = Exact<{
 
 
 export type CholesterolRecordListQueryQuery = { cholesterol_records: Array<{ diastolic_pressure: any, id: any, systolic_pressure: any, pulse_rate: any, record_time: any }> };
+
+export type CholesterolRecordOneQueryQueryVariables = Exact<{
+  id: Scalars['uuid']['input'];
+}>;
+
+
+export type CholesterolRecordOneQueryQuery = { cholesterol_records_by_pk?: { diastolic_pressure: any, medication_record?: string | null, pulse_rate: any, record_time: any, remarks?: string | null, symptoms?: any | null, systolic_pressure: any } | null };
+
+export type CholesterolRecordFilterQueryQueryVariables = Exact<{
+  _gt: Scalars['timestamptz']['input'];
+  _lt: Scalars['timestamptz']['input'];
+  measurementPeriod: Scalars['Int']['input'];
+}>;
+
+
+export type CholesterolRecordFilterQueryQuery = { cholesterol_records: Array<{ record_time: any, measurement_period?: number | null, id: any }> };
 
 export type InsertCholesterolRecordOneMutationMutationVariables = Exact<{
   object: Cholesterol_Records_Insert_Input;
@@ -20006,15 +20058,16 @@ export type CholesterolStatisticsQueryQueryVariables = Exact<{
 }>;
 
 
-export type CholesterolStatisticsQueryQuery = { cholesterol_records: Array<{ diastolic_pressure: any, id: any, medication_record?: string | null, pulse_rate: any, record_time: any, systolic_pressure: any }> };
+export type CholesterolStatisticsQueryQuery = { cholesterol_records: Array<{ diastolic_pressure: any, id: any, medication_record?: string | null, pulse_rate: any, record_time: any, systolic_pressure: any, measurement_period?: number | null }> };
 
 export type CholesterolStatisticsChartQueryQueryVariables = Exact<{
   startDate?: InputMaybe<Scalars['timestamptz']['input']>;
   endDate?: InputMaybe<Scalars['timestamptz']['input']>;
+  measurementPeriod?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type CholesterolStatisticsChartQueryQuery = { cholesterol_records: Array<{ diastolic_pressure: any, id: any, medication_record?: string | null, pulse_rate: any, record_time: any, systolic_pressure: any }> };
+export type CholesterolStatisticsChartQueryQuery = { cholesterol_records: Array<{ diastolic_pressure: any, id: any, medication_record?: string | null, pulse_rate: any, record_time: any, systolic_pressure: any, measurement_period?: number | null }> };
 
 export type CholesterolStatisticsPieChartQueryQueryVariables = Exact<{
   startDate?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -20280,16 +20333,18 @@ export type DeleteMedicationRemindersMutationVariables = Exact<{ [key: string]: 
 export type DeleteMedicationRemindersMutation = { delete_medication_reminders?: { affected_rows: number } | null };
 
 
-export const CholesterolRecordDetailQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordDetailQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}},{"kind":"Field","name":{"kind":"Name","value":"symptoms"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordDetailQueryQuery, CholesterolRecordDetailQueryQueryVariables>;
+export const CholesterolRecordDetailQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordDetailQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}},{"kind":"Field","name":{"kind":"Name","value":"symptoms"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordDetailQueryQuery, CholesterolRecordDetailQueryQueryVariables>;
 export const DeleteCholesterolRecordMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCholesterolRecordMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteCholesterolRecordMutationMutation, DeleteCholesterolRecordMutationMutationVariables>;
 export const CholesterolRecordListQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordListQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordListQueryQuery, CholesterolRecordListQueryQueryVariables>;
+export const CholesterolRecordOneQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordOneQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}},{"kind":"Field","name":{"kind":"Name","value":"symptoms"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordOneQueryQuery, CholesterolRecordOneQueryQueryVariables>;
+export const CholesterolRecordFilterQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolRecordFilterQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gt"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"measurement_period"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CholesterolRecordFilterQueryQuery, CholesterolRecordFilterQueryQueryVariables>;
 export const InsertCholesterolRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertCholesterolRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"cholesterol_records_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_cholesterol_records_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertCholesterolRecordOneMutationMutation, InsertCholesterolRecordOneMutationMutationVariables>;
 export const UpdateCholesterolRecordOneMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCholesterolRecordOneMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"cholesterol_records_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_cholesterol_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateCholesterolRecordOneMutationMutation, UpdateCholesterolRecordOneMutationMutationVariables>;
 export const CholesterolStandardsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStandardsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_standards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_cholesterol_standards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CholesterolStandardsQueryQuery, CholesterolStandardsQueryQueryVariables>;
 export const InsertUserCholesterolStandardsMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertUserCholesterolStandardsMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"user_cholesterol_standards_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_user_cholesterol_standards_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertUserCholesterolStandardsMutationMutation, InsertUserCholesterolStandardsMutationMutationVariables>;
 export const UpdateUserCholesterolStandardsMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUserCholesterolStandardsMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"user_cholesterol_standards_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_user_cholesterol_standards_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserCholesterolStandardsMutationMutation, UpdateUserCholesterolStandardsMutationMutationVariables>;
-export const CholesterolStatisticsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStatisticsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}}]}}]}}]} as unknown as DocumentNode<CholesterolStatisticsQueryQuery, CholesterolStatisticsQueryQueryVariables>;
-export const CholesterolStatisticsChartQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStatisticsChartQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}}]}}]}}]} as unknown as DocumentNode<CholesterolStatisticsChartQueryQuery, CholesterolStatisticsChartQueryQueryVariables>;
+export const CholesterolStatisticsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStatisticsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}}]}}]}}]} as unknown as DocumentNode<CholesterolStatisticsQueryQuery, CholesterolStatisticsQueryQueryVariables>;
+export const CholesterolStatisticsChartQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStatisticsChartQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cholesterol_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"measurement_period"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diastolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"pulse_rate"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"systolic_pressure"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}}]}}]}}]} as unknown as DocumentNode<CholesterolStatisticsChartQueryQuery, CholesterolStatisticsChartQueryQueryVariables>;
 export const CholesterolStatisticsPieChartQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CholesterolStatisticsPieChartQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"tooLarge"},"name":{"kind":"Name","value":"cholesterol_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_large"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"tooSmall"},"name":{"kind":"Name","value":"cholesterol_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_small"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"normal"},"name":{"kind":"Name","value":"cholesterol_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_large"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"too_small"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<CholesterolStatisticsPieChartQueryQuery, CholesterolStatisticsPieChartQueryQueryVariables>;
 export const GlucoseRecordOneQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GlucoseRecordOneQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"glucose_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diet_record"}},{"kind":"Field","name":{"kind":"Name","value":"exercise_record"}},{"kind":"Field","name":{"kind":"Name","value":"glucose_value"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}},{"kind":"Field","name":{"kind":"Name","value":"medication_record"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_glucose_standards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"max"}},{"kind":"Field","name":{"kind":"Name","value":"min"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"glucose_standards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"max"}},{"kind":"Field","name":{"kind":"Name","value":"min"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]}}]} as unknown as DocumentNode<GlucoseRecordOneQueryQuery, GlucoseRecordOneQueryQueryVariables>;
 export const DeleteGlucoseRecordMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteGlucoseRecordMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_glucose_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteGlucoseRecordMutationMutation, DeleteGlucoseRecordMutationMutationVariables>;

@@ -24,19 +24,21 @@ const CholesterolStatisticsQueryDocument = graphql(`
             pulse_rate
             record_time
             systolic_pressure
+            measurement_period
         }
     }
 `);
 
 const CholesterolStatisticsChartQueryDocument = graphql(`
-    query CholesterolStatisticsChartQuery ($startDate: timestamptz = "", $endDate: timestamptz = "") {
-        cholesterol_records(where: {record_time: {_gt: $startDate, _lt: $endDate}}, order_by: {record_time: asc}) {
+    query CholesterolStatisticsChartQuery ($startDate: timestamptz = "", $endDate: timestamptz = "", $measurementPeriod: Int = 1) {
+        cholesterol_records(where: {record_time: {_gt: $startDate, _lt: $endDate}, measurement_period: {_eq: $measurementPeriod}}, order_by: {record_time: asc}) {
             diastolic_pressure
             id
             medication_record
             pulse_rate
             record_time
             systolic_pressure
+            measurement_period
         }
     }
 `);
@@ -166,12 +168,12 @@ function Index() {
             }
         },
     });
-    const tableColumns: TableColumnProps[] = [
+    const tableColumns: any[] = [
         {
             key: 'date',
             title: '时间',
             align: 'center',
-            width: 34,
+            fixed: 'left',
             render: (rowData) => {
                 return (
                     <View className='flex flex-col items-center justify-between'>
@@ -182,18 +184,63 @@ function Index() {
             }
         },
         {
-            key: 'systolic_pressure',
-            title: '收缩压（高压）',
+            key: 'systolic_pressure1',
+            title: '上午\n收缩压\n（高压）',
             align: 'center',
         },
         {
-            key: 'diastolic_pressure',
-            title: '舒张压（低压）',
+            key: 'diastolic_pressure1',
+            title: '上午\n舒张压\n（低压）',
             align: 'center',
         },
         {
-            key: 'pulse_rate',
-            title: '心率',
+            key: 'pulse_rate1',
+            title: '上午\n心率',
+            align: 'center',
+        },
+        {
+            key: 'systolic_pressure2',
+            title: '中午\n收缩压\n（高压）',
+            align: 'center',
+        },
+        {
+            key: 'diastolic_pressure2',
+            title: '中午\n舒张压\n（低压）',
+            align: 'center',
+        },
+        {
+            key: 'pulse_rate2',
+            title: '中午\n心率',
+            align: 'center',
+        },
+        {
+            key: 'systolic_pressure3',
+            title: '下午\n收缩压\n（高压）',
+            align: 'center',
+        },
+        {
+            key: 'diastolic_pressure3',
+            title: '下午\n舒张压\n（低压）',
+            align: 'center',
+        },
+        {
+            key: 'pulse_rate3',
+            title: '下午\n心率',
+            align: 'center',
+        },
+        {
+            key: 'systolic_pressure4',
+            title: '睡前\n收缩压\n（高压）',
+            align: 'center',
+        },
+        {
+            key: 'diastolic_pressure4',
+            title: '睡前\n舒张压\n（低压）',
+            align: 'center',
+        },
+        {
+            key: 'pulse_rate4',
+            title: '睡前\n心率',
             align: 'center',
         },
     ];
@@ -234,9 +281,24 @@ function Index() {
                     date,
                 };
                 cholesterolRecords.forEach(record => {
-                    rowData.systolic_pressure = record.systolic_pressure;
-                    rowData.diastolic_pressure = record.diastolic_pressure;
-                    rowData.pulse_rate = record.pulse_rate;
+                    console.log(record);
+                    if (record.measurement_period === 1) {
+                        rowData.systolic_pressure1 = record.systolic_pressure;
+                        rowData.diastolic_pressure1 = record.diastolic_pressure;
+                        rowData.pulse_rate1 = record.pulse_rate;
+                    } else if (record.measurement_period === 2) {
+                        rowData.systolic_pressure2 = record.systolic_pressure;
+                        rowData.diastolic_pressure2 = record.diastolic_pressure;
+                        rowData.pulse_rate2 = record.pulse_rate;
+                    } else if (record.measurement_period === 3) {
+                        rowData.systolic_pressure3 = record.systolic_pressure;
+                        rowData.diastolic_pressure3 = record.diastolic_pressure;
+                        rowData.pulse_rate3 = record.pulse_rate;
+                    } else if (record.measurement_period === 4) {
+                        rowData.systolic_pressure4 = record.systolic_pressure;
+                        rowData.diastolic_pressure4 = record.diastolic_pressure;
+                        rowData.pulse_rate4 = record.pulse_rate;
+                    }
                 });
                 newTableData.push(rowData);
             }
