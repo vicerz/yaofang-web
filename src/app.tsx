@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
 import 'uno.css';
 
+import VConsole from 'vconsole';
+
 import UrqlProvider from './urql/provider';
 import LogtoProvider from './logto/provider';
 
 // 全局样式
 import './app.scss';
+
+const vConsole = new VConsole();
+
+vConsole.show();
 
 function App(props) {
     // 可以使用所有的 React Hooks
