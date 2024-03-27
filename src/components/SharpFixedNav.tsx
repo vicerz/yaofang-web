@@ -18,7 +18,7 @@ const SharpFixedNav: React.FC = () => {
     };
 
     return (
-        <NutDrag direction='y' className='drag' style={{ right: '0px', bottom: '100px' }}>
+        <NutDrag direction='y' className='drag' style={{ right: '0px', bottom: '20px' }}>
             <NutFixedNav
                 list={list}
                 inactiveText='快捷导航'

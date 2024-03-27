@@ -70,6 +70,12 @@
         --nutui-button-default-font-size: 18px;
     }
 
+    /* FixedNav */
+    .nut-fixednav-btn .text {
+        width: 26px !important;
+        font-size: 12px !important;
+    }
+
     .nut-tag--close {
         --nutui-tag-padding: 4px 8px;
     }

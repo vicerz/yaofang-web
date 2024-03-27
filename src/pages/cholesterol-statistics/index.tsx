@@ -71,6 +71,8 @@ function Index() {
     const [chartDateRange, setChartDateRange] = useState(dateRange);
     const [pieChartDateRange, setPieChartDateRange] = useState(dateRange);
     const [currentDateRange, setCurrentDateRange] = useState('');
+    const [measurementPeriodVisible, setMeasurementPeriodVisible] = useState(false);
+    const [measurementPeriod, setMeasurementPeriod] = useState(1);
 
     const [tableData, setTableData] = useState<any[]>([]); // 表格数据
     const [lineChartSpec, setLineChartSpec] = useState({
@@ -257,6 +259,7 @@ function Index() {
         variables: {
             startDate: dayjs(chartDateRange[0]).subtract(1, 'day').toDate(),
             endDate: dayjs(chartDateRange[1]).add(1, 'day').toDate(),
+            measurementPeriod,
         }
     });
     const [{ data: cholesterolRecordsPieChartData }] = useQuery({
@@ -266,6 +269,15 @@ function Index() {
             endDate: dayjs(pieChartDateRange[1]).add(1, 'day').toDate(),
         }
     });
+
+    const measurementPeriodList = [
+        [
+            { text: '上午', value: '1' },
+            { text: '中午', value: '2' },
+            { text: '下午', value: '3' },
+            { text: '睡前', value: '4' },
+        ]
+    ];
 
     useEffect(() => {
         if (cholesterolRecordsData) {
@@ -281,7 +293,6 @@ function Index() {
                     date,
                 };
                 cholesterolRecords.forEach(record => {
-                    console.log(record);
                     if (record.measurement_period === 1) {
                         rowData.systolic_pressure1 = record.systolic_pressure;
                         rowData.diastolic_pressure1 = record.diastolic_pressure;
@@ -426,10 +437,19 @@ function Index() {
                                 dayjs(chartDateRange[0]).format('YYYY.MM.DD')}~{dayjs(chartDateRange[1]).format('YYYY.MM.DD')
                             }</TaroText>
                         </View>
+                        <View
+                            className='flex items-center gap-20px py-20px px-26px rd-10px bg-primary'
+                            onClick={() => setMeasurementPeriodVisible(true)}
+                        >
+                            <TaroText className='text-26px c-white lh-33px'>{
+                                measurementPeriodList[0].find(item => item.value === String(measurementPeriod))?.text
+                            }</TaroText>
+                            <NutIconArrowSize8 className='ml-auto' color='white' size={14} />
+                        </View>
                     </View>
                     <VChart
                         type='h5'
-                        spec={lineChartSpec}
+                        spec={lineChartSpec as any}
                         canvasId='glucose-statistics-line'
                         style={{ height: '35vh', width: '100%' }}
                     />
@@ -455,7 +475,7 @@ function Index() {
                     </View>
                     <VChart
                         type='h5'
-                        spec={pieChartSpec}
+                        spec={pieChartSpec as any}
                         canvasId='glucose-statistics-pie'
                         style={{ height: '35vh', width: '100%' }}
                     />
@@ -502,6 +522,16 @@ function Index() {
                 />
             </NutPopup>
 
+            <NutPicker
+                visible={measurementPeriodVisible}
+                options={measurementPeriodList}
+                defaultValue={[measurementPeriod]}
+                onConfirm={(list, values) => {
+                    setMeasurementPeriod(Number(values[0]));
+                    setMeasurementPeriodVisible(false);
+                }}
+                onClose={() => setMeasurementPeriodVisible(false)}
+            />
         </>
     );
 }
