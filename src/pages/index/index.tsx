@@ -1,5 +1,6 @@
 import { useLogto, type UserInfoResponse } from '@logto/react';
 import dayjs from 'dayjs';
+import Taro from '@tarojs/taro';
 
 import signInCardBg from '@/assets/signin-bg.png';
 import record1bg from '@/assets/record-1-bg.png';
@@ -163,8 +164,12 @@ function Index() {
                         },
                     },
                 });
-                fetchUserInfo().then(setUserInfo);
+                Taro.showLoading({
+                    title: '正在跳转...'
+                });
+                setUserInfo(await fetchUserInfo());
                 window.location.href = data?.check_in_settings[0]?.inaugural_url || '';
+                Taro.hideLoading();
             }
         }
     };
@@ -199,7 +204,11 @@ function Index() {
     }, [checkInData]);
 
     useDidShow(async () => {
-        setUserInfo(await fetchUserInfo());
+        try {
+            setUserInfo(await fetchUserInfo());
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     return (
