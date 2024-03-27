@@ -203,13 +203,9 @@ function Index() {
         }
     }, [checkInData]);
 
-    useDidShow(async () => {
-        try {
-            setUserInfo(await fetchUserInfo());
-        } catch (error) {
-            console.log(error);
-        }
-    });
+    useEffect(() => {
+        fetchUserInfo().then(setUserInfo);
+    }, []);
 
     return (
         <View className='flex flex-col pb-180px'>
