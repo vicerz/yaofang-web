@@ -11,7 +11,7 @@ import './index.scss';
 
 const IndexPageQueryDocument = graphql(`
     query IndexPageQuery {
-        ads(where: {type: {_eq: 0}}) {
+        ads(where: {type: {_eq: 0}}, order_by: {custom_order: asc}) {
             name
             type
             image

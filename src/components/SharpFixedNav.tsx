@@ -1,11 +1,9 @@
 
 const SharpFixedNav: React.FC = () => {
-    const [fixedNavVisible, setFixedNavVisible] = useState(false);
     const list = [
         {
             id: 'index',
-            text: '首页',
-            icon: 'https://img11.360buyimg.com/imagetools/jfs/t1/117646/2/11112/1297/5ef83e95E81d77f05/daf8e3b1c81e3c98.png',
+            text: '回首页',
         },
     ];
 
@@ -18,14 +16,10 @@ const SharpFixedNav: React.FC = () => {
     };
 
     return (
-        <NutDrag direction='y' className='drag' style={{ right: '0px', bottom: '20px' }}>
-            <NutFixedNav
-                list={list}
-                inactiveText='快捷导航'
-                visible={fixedNavVisible}
-                onChange={(visible) => setFixedNavVisible(visible)}
-                onSelect={handleSelect}
-            />
+        <NutDrag direction='y' className='drag' style={{ right: '0px', bottom: '80px' }}>
+            <View className='w-100px h-80px shadow-xl bg-primary pr-10px rd-l-full text-white text-26px flex items-center justify-end' onClick={() => handleSelect(list[0])}>
+                {list[0].text}
+            </View>
         </NutDrag>
     );
 };

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import 'uno.css';
-import { useRouter } from '@tarojs/taro';
 
 import UrqlProvider from './urql/provider';
 import LogtoProvider from './logto/provider';
@@ -17,6 +16,7 @@ function App(props) {
         const isIOS= !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         if (isIOS) {
             window.history.pushState({}, "title", "");
+            window.history.scrollRestoration ='manual';
         }
     });
 

@@ -59,7 +59,7 @@ function Index() {
     const [calendarVisible, setCalendarVisible] = useState(false);
     const [measurementPeriodVisible, setMeasurementPeriodVisible] = useState(false);
 
-    const [dateRange, setDateRange] = useState([dayjs().subtract(7, 'day').toDate(), dayjs().toDate()]);
+    const [dateRange, setDateRange] = useState([dayjs().subtract(6, 'day').toDate(), dayjs().toDate()]);
     const [tableDateRange, setTableDateRange] = useState(dateRange);
     const [chartDateRange, setChartDateRange] = useState(dateRange);
     const [pieChartDateRange, setPieChartDateRange] = useState(dateRange);

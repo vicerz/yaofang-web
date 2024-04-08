@@ -66,7 +66,7 @@ const CholesterolStatisticsPieChartQueryDocument = graphql(`
 function Index() {
     const [calendarVisible, setCalendarVisible] = useState(false);
 
-    const [dateRange, setDateRange] = useState([dayjs().subtract(7, 'day').toDate(), dayjs().toDate()]);
+    const [dateRange, setDateRange] = useState([dayjs().subtract(6, 'day').toDate(), dayjs().toDate()]);
     const [tableDateRange, setTableDateRange] = useState(dateRange);
     const [chartDateRange, setChartDateRange] = useState(dateRange);
     const [pieChartDateRange, setPieChartDateRange] = useState(dateRange);
@@ -125,7 +125,7 @@ function Index() {
         innerRadius: 0.5,
         padAngle: 0.6,
         color: {
-            range: ['#F5B647', '##B29251','#EC6400'],
+            range: ['#F5B647', '#B29251','#EC6400'],
         },
         legends: {
             visible: true,
