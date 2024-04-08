@@ -15,7 +15,7 @@ function App(props) {
     useDidShow(() => {
         const isIOS= !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         if (isIOS) {
-            window.history.pushState({}, "title", "");
+            // window.history.pushState({}, "title", "");
             window.history.scrollRestoration ='manual';
         }
     });

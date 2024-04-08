@@ -1,3 +1,12 @@
+@supports (bottom: constant(safe-area-inset-bottom)) {
+    body {
+        /* 适配齐刘海 */
+        padding-top: constant(safe-area-inset-top);
+
+        /* 适配底部黑条 */
+        padding-bottom: constant(safe-area-inset-bottom);
+    }
+}
 
 :root {
     /* Custom Theme */
