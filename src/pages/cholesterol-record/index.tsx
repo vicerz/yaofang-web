@@ -209,10 +209,10 @@ function Index() {
                             name='symptoms'
                             label='症状（选填）'
                         >
-                            <NutCheckbox.Group direction='horizontal' className='flex justify-end gap-20px'>
-                                <NutCheckbox value='1' className='important-mr-0'>早搏</NutCheckbox>
-                                <NutCheckbox value='2' className='important-mr-0'>心律不齐</NutCheckbox>
-                                <NutCheckbox value='3' className='important-mr-0'>心颤</NutCheckbox>
+                            <NutCheckbox.Group direction='horizontal'>
+                                <NutCheckbox value='1'>早搏</NutCheckbox>
+                                <NutCheckbox value='3'>心颤</NutCheckbox>
+                                <NutCheckbox value='2'>心律不齐</NutCheckbox>
                             </NutCheckbox.Group>
                         </NutForm.Item>
                         <NutForm.Item

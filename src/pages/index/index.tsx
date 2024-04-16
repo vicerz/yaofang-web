@@ -11,7 +11,7 @@ import './index.scss';
 
 const IndexPageQueryDocument = graphql(`
     query IndexPageQuery {
-        ads(where: {type: {_eq: 0}}, order_by: {custom_order: asc}) {
+        ads(where: {type: {_eq: 0}, enable: {_eq: true}}, order_by: {custom_order: asc}) {
             name
             type
             image
@@ -23,6 +23,7 @@ const IndexPageQueryDocument = graphql(`
             consecutive_days
             is_continuation
             is_first_consecutive_completed
+            received
         }
         check_in_settings(limit: 1) {
             inaugural
@@ -99,6 +100,11 @@ function Index() {
         return dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
     };
 
+    // 判断是否满足首签
+    const isFirstCheckIn = useMemo(() => {
+        return !data?.check_ins[0].is_continuation;
+    }, [data]);
+
     // 获取前一天的连续签到天数
     const getYesterdayConsecutiveDays = useMemo(() => {
         if (!data?.check_ins[0]?.check_in_date) {
@@ -120,10 +126,13 @@ function Index() {
     }, [data]);
 
     const allowedReceive = () => {
-        if (!(userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted && data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
+        if (data?.check_ins[0].received) {
+            return false;
+        }
+        if (data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
             return true;
         }
-        if ((userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted && data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.following) {
+        if (data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.following) {
             return true;
         }
         return false;
@@ -132,29 +141,30 @@ function Index() {
     const handleReceiveCoupon = async () => {
         // 领取福利券后，更新用户信息，标记首次连续签到已完成，重置连续签到天数
         const userCheckInData = data?.check_ins[0];
+        // 领取福利券
+        await checkIn({
+            object: {
+                check_in_date: dayjs().format('YYYY-MM-DD'),
+                consecutive_days: 0,
+                is_continuation: true,
+                received: true,
+            },
+        });
         if ((userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted) {
             if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.following) {
-                // 领取福利券
-                await checkIn({
+                await updateUser({
+                    id: userInfo!.sub,
                     object: {
-                        check_in_date: dayjs().format('YYYY-MM-DD'),
-                        consecutive_days: 0,
-                        is_continuation: false,
+                        custom_data: {
+                            ...userInfo?.custom_data || {},
+                            firstConsecutiveCompleted: false,
+                        },
                     },
                 });
                 window.location.href = data?.check_in_settings[0]?.following_url || '';
             }
         } else {
             if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
-                // 领取福利券
-                await checkIn({
-                    object: {
-                        check_in_date: dayjs().format('YYYY-MM-DD'),
-                        consecutive_days: 0,
-                        is_continuation: false,
-                        is_first_consecutive_completed: true,
-                    },
-                });
                 await updateUser({
                     id: userInfo!.sub,
                     object: {
@@ -181,7 +191,7 @@ function Index() {
         // 未签到 = 列表长度 - 当前连续签到天数
         // 已签到 = 当前连续签到天数
         const list: {type: 'unchecked' | 'checked' | 'coupon' | 'coupon-checked'}[] = [];
-        const length = (userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted ? data?.check_in_settings[0]?.following : data?.check_in_settings[0]?.inaugural;
+        const length = isFirstCheckIn ? data?.check_in_settings[0]?.inaugural : data?.check_in_settings[0]?.following;
         for (let i = 0; i < length - 1; i++) {
             if (i < (getYesterdayConsecutiveDays || 0)) {
                 list.push({type: 'checked'});
@@ -260,9 +270,9 @@ function Index() {
                                     ))}
                                 </View>
                                 <TaroText className='text-24px color-primary'>
-                                    {!(userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted &&  '首次'}
-                                连续签到{
-                                        !(userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted
+                                    {isFirstCheckIn &&  '首次'}
+                                    连续签到{
+                                        isFirstCheckIn
                                             ? data?.check_in_settings[0]?.inaugural
                                             : data?.check_in_settings[0]?.following
                                     }天可领取福利券...

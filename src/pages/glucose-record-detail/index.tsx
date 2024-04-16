@@ -164,7 +164,7 @@ function Index() {
                 outerRadius: 0.9,
                 innerRadius: 0.65,
                 min: 0,
-                max: 10,
+                max: 40,
                 grid: { visible: false },
                 tick: { visible: true, tickSize: 0, style: { lineWidth: 4, lineCap: 'round' } },
                 subTick: { visible: true, tickSize: 0, style: { lineWidth: 4, lineCap: 'round' } },

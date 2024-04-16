@@ -167,6 +167,7 @@ export type String_Comparison_Exp = {
 export type Ads = {
   created_at: Scalars['timestamptz']['output'];
   custom_order?: Maybe<Scalars['Int']['output']>;
+  enable?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['uuid']['output'];
   image: Scalars['String']['output'];
   link: Scalars['String']['output'];
@@ -218,6 +219,7 @@ export type Ads_Bool_Exp = {
   _or?: InputMaybe<Array<Ads_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   custom_order?: InputMaybe<Int_Comparison_Exp>;
+  enable?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   link?: InputMaybe<String_Comparison_Exp>;
@@ -243,6 +245,7 @@ export type Ads_Inc_Input = {
 export type Ads_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   custom_order?: InputMaybe<Scalars['Int']['input']>;
+  enable?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
@@ -297,6 +300,7 @@ export type Ads_On_Conflict = {
 export type Ads_Order_By = {
   created_at?: InputMaybe<Order_By>;
   custom_order?: InputMaybe<Order_By>;
+  enable?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   link?: InputMaybe<Order_By>;
@@ -317,6 +321,8 @@ export enum Ads_Select_Column {
   /** column name */
   CustomOrder = 'custom_order',
   /** column name */
+  Enable = 'enable',
+  /** column name */
   Id = 'id',
   /** column name */
   Image = 'image',
@@ -334,6 +340,7 @@ export enum Ads_Select_Column {
 export type Ads_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   custom_order?: InputMaybe<Scalars['Int']['input']>;
+  enable?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
@@ -376,6 +383,7 @@ export type Ads_Stream_Cursor_Input = {
 export type Ads_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   custom_order?: InputMaybe<Scalars['Int']['input']>;
+  enable?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
@@ -398,6 +406,8 @@ export enum Ads_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   CustomOrder = 'custom_order',
+  /** column name */
+  Enable = 'enable',
   /** column name */
   Id = 'id',
   /** column name */
@@ -1979,6 +1989,7 @@ export type Check_Ins = {
   is_continuation: Scalars['Boolean']['output'];
   /** 是否完成首次连续签到 */
   is_first_consecutive_completed?: Maybe<Scalars['Boolean']['output']>;
+  received?: Maybe<Scalars['Boolean']['output']>;
   user_id: Scalars['String']['output'];
 };
 
@@ -2026,6 +2037,7 @@ export type Check_Ins_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_continuation?: InputMaybe<Boolean_Comparison_Exp>;
   is_first_consecutive_completed?: InputMaybe<Boolean_Comparison_Exp>;
+  received?: InputMaybe<Boolean_Comparison_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -2052,6 +2064,7 @@ export type Check_Ins_Insert_Input = {
   is_continuation?: InputMaybe<Scalars['Boolean']['input']>;
   /** 是否完成首次连续签到 */
   is_first_consecutive_completed?: InputMaybe<Scalars['Boolean']['input']>;
+  received?: InputMaybe<Scalars['Boolean']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2096,6 +2109,7 @@ export type Check_Ins_Order_By = {
   id?: InputMaybe<Order_By>;
   is_continuation?: InputMaybe<Order_By>;
   is_first_consecutive_completed?: InputMaybe<Order_By>;
+  received?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
@@ -2119,6 +2133,8 @@ export enum Check_Ins_Select_Column {
   /** column name */
   IsFirstConsecutiveCompleted = 'is_first_consecutive_completed',
   /** column name */
+  Received = 'received',
+  /** column name */
   UserId = 'user_id'
 }
 
@@ -2132,6 +2148,7 @@ export type Check_Ins_Set_Input = {
   is_continuation?: InputMaybe<Scalars['Boolean']['input']>;
   /** 是否完成首次连续签到 */
   is_first_consecutive_completed?: InputMaybe<Scalars['Boolean']['input']>;
+  received?: InputMaybe<Scalars['Boolean']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2168,6 +2185,7 @@ export type Check_Ins_Stream_Cursor_Value_Input = {
   is_continuation?: InputMaybe<Scalars['Boolean']['input']>;
   /** 是否完成首次连续签到 */
   is_first_consecutive_completed?: InputMaybe<Scalars['Boolean']['input']>;
+  received?: InputMaybe<Scalars['Boolean']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2190,6 +2208,8 @@ export enum Check_Ins_Update_Column {
   IsContinuation = 'is_continuation',
   /** column name */
   IsFirstConsecutiveCompleted = 'is_first_consecutive_completed',
+  /** column name */
+  Received = 'received',
   /** column name */
   UserId = 'user_id'
 }
@@ -20208,7 +20228,7 @@ export type GlucoseStatisticsPieChartQueryQuery = { tooLarge: { aggregate?: { co
 export type IndexPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQueryQuery = { ads: Array<{ name?: string | null, type: number, image: string, link: string }>, check_ins: Array<{ check_in_date: any, id: any, consecutive_days: number, is_continuation: boolean, is_first_consecutive_completed?: boolean | null }>, check_in_settings: Array<{ inaugural: any, following: any, inaugural_url?: string | null, following_url?: string | null }> };
+export type IndexPageQueryQuery = { ads: Array<{ name?: string | null, type: number, image: string, link: string }>, check_ins: Array<{ check_in_date: any, id: any, consecutive_days: number, is_continuation: boolean, is_first_consecutive_completed?: boolean | null, received?: boolean | null }>, check_in_settings: Array<{ inaugural: any, following: any, inaugural_url?: string | null, following_url?: string | null }> };
 
 export type CheckInMutationMutationVariables = Exact<{
   object: Check_Ins_Insert_Input;
@@ -20382,7 +20402,7 @@ export const DeleteUserGlucoseStandardsMutationDocument = {"kind":"Document","de
 export const GlucoseStatisticsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GlucoseStatisticsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"glucose_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"glucose_value"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}}]}}]}}]} as unknown as DocumentNode<GlucoseStatisticsQueryQuery, GlucoseStatisticsQueryQueryVariables>;
 export const GlucoseStatisticsChartQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GlucoseStatisticsChartQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"glucose_records"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"measurement_period"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"measurementPeriod"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"glucose_value"}},{"kind":"Field","name":{"kind":"Name","value":"measurement_period"}},{"kind":"Field","name":{"kind":"Name","value":"record_time"}}]}}]}}]} as unknown as DocumentNode<GlucoseStatisticsChartQueryQuery, GlucoseStatisticsChartQueryQueryVariables>;
 export const GlucoseStatisticsPieChartQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GlucoseStatisticsPieChartQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"tooLarge"},"name":{"kind":"Name","value":"glucose_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_large"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"tooSmall"},"name":{"kind":"Name","value":"glucose_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_small"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"normal"},"name":{"kind":"Name","value":"glucose_records_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"too_large"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"too_small"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"record_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startDate"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"endDate"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GlucoseStatisticsPieChartQueryQuery, GlucoseStatisticsPieChartQueryQueryVariables>;
-export const IndexPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"IndexPageQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"IntValue","value":"0"}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"custom_order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"check_ins"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"check_in_date"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"consecutive_days"}},{"kind":"Field","name":{"kind":"Name","value":"is_continuation"}},{"kind":"Field","name":{"kind":"Name","value":"is_first_consecutive_completed"}}]}},{"kind":"Field","name":{"kind":"Name","value":"check_in_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"inaugural"}},{"kind":"Field","name":{"kind":"Name","value":"following"}},{"kind":"Field","name":{"kind":"Name","value":"inaugural_url"}},{"kind":"Field","name":{"kind":"Name","value":"following_url"}}]}}]}}]} as unknown as DocumentNode<IndexPageQueryQuery, IndexPageQueryQueryVariables>;
+export const IndexPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"IndexPageQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ads"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"IntValue","value":"0"}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"enable"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"custom_order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}},{"kind":"Field","name":{"kind":"Name","value":"check_ins"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"check_in_date"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"consecutive_days"}},{"kind":"Field","name":{"kind":"Name","value":"is_continuation"}},{"kind":"Field","name":{"kind":"Name","value":"is_first_consecutive_completed"}},{"kind":"Field","name":{"kind":"Name","value":"received"}}]}},{"kind":"Field","name":{"kind":"Name","value":"check_in_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"inaugural"}},{"kind":"Field","name":{"kind":"Name","value":"following"}},{"kind":"Field","name":{"kind":"Name","value":"inaugural_url"}},{"kind":"Field","name":{"kind":"Name","value":"following_url"}}]}}]}}]} as unknown as DocumentNode<IndexPageQueryQuery, IndexPageQueryQueryVariables>;
 export const CheckInMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CheckInMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"check_ins_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_check_ins_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CheckInMutationMutation, CheckInMutationMutationVariables>;
 export const UpdateUserCustomMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUserCustomMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_users_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserCustomMutationMutation, UpdateUserCustomMutationMutationVariables>;
 export const LabReportRecordDetailQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LabReportRecordDetailQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lab_report_records_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assay_date"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"remarks"}},{"kind":"Field","name":{"kind":"Name","value":"report_type"}}]}}]}}]} as unknown as DocumentNode<LabReportRecordDetailQueryQuery, LabReportRecordDetailQueryQueryVariables>;
