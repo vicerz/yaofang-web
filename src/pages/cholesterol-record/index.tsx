@@ -208,8 +208,9 @@ function Index() {
                         <NutForm.Item
                             name='symptoms'
                             label='症状（选填）'
+                            className='flex-col'
                         >
-                            <NutCheckbox.Group direction='horizontal'>
+                            <NutCheckbox.Group direction='horizontal' className='pl-20px pt-20px'>
                                 <NutCheckbox value='1'>早搏</NutCheckbox>
                                 <NutCheckbox value='3'>心颤</NutCheckbox>
                                 <NutCheckbox value='2'>心律不齐</NutCheckbox>
