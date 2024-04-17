@@ -92,7 +92,11 @@ function Index() {
                 }
             }
         },
-        padding: 0,
+        padding: {
+            top: 0,
+            left: 0,
+            right: 0,
+        },
         data: {
             values: [
             ]
