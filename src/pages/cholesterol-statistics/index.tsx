@@ -82,7 +82,7 @@ function Index() {
         seriesField: 'type',
         legends: [{ visible: true, position: 'middle', orient: 'top' }],
         color: {
-            range: ['#EC6400', '#116E7F', '#116E7F'],
+            range: ['#EC6400', '#03ADF2', '#FFDE59'],
         },
         tooltip: {
             trigger: 'click' as 'hover'|'click'|'none',
