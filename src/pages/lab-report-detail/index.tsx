@@ -128,6 +128,8 @@ function Index() {
                 visible={!!previewIndex}
                 defaultValue={previewIndex}
             />
+
+            <SharpFixedNav />
         </>
     );
 }

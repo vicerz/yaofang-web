@@ -161,7 +161,7 @@ function Index() {
 
     return (
         <>
-            <View className='bg-#B29251'>
+            <View className='bg-#116E7F pb-150px'>
                 <View className='flex flex-col gap-20px pt-80px px-40px rd-t-50px bg-white'>
                     <NutForm
                         form={form}
@@ -259,20 +259,24 @@ function Index() {
                             <NutTextArea rows={5} placeholder='(选填)' />
                         </NutForm.Item>
                     </NutForm>
-                    <View className='flex gap-30px mt-50px pb-60px'>
-                        <SharpButton.Outline
-                            onClick={() => {
-                                Router.toIndex();
-                            }}
-                        >
-                            取消
-                        </SharpButton.Outline>
-                        <SharpButton.Primary onClick={form.submit}>
-                            保存
-                        </SharpButton.Primary>
-                    </View>
                 </View>
             </View>
+
+            <View className='w-full pt-20px pb-60px fixed bottom-0 left-0 bg-white z-2'>
+                <View className='px-40px flex gap-30px'>
+                    <SharpButton.Outline
+                        onClick={() => {
+                            Router.toIndex();
+                        }}
+                    >
+                            取消
+                    </SharpButton.Outline>
+                    <SharpButton.Primary onClick={form.submit}>
+                            保存
+                    </SharpButton.Primary>
+                </View>
+            </View>
+
             <NutDatePicker
                 visible={datePickerVisible}
                 type='datetime'

@@ -82,7 +82,7 @@ function Index() {
         seriesField: 'type',
         legends: [{ visible: true, position: 'middle', orient: 'top' }],
         color: {
-            range: ['#EC6400', '#B29251', '#116E7F'],
+            range: ['#EC6400', '#116E7F', '#116E7F'],
         },
         tooltip: {
             trigger: 'click' as 'hover'|'click'|'none',
@@ -125,7 +125,7 @@ function Index() {
         innerRadius: 0.5,
         padAngle: 0.6,
         color: {
-            range: ['#F5B647', '#B29251','#EC6400'],
+            range: ['#F5B647', '#116E7F','#EC6400'],
         },
         legends: {
             visible: true,
@@ -386,20 +386,20 @@ function Index() {
     }, [cholesterolRecordsPieChartData]);
 
     return (
-        <>
+        <View className='cholesterol-statistics'>
             <View className='flex flex-col pt-80px pb-80px px-40px gap-50px'>
                 <View className='flex justify-between items-center'>
                     <View
-                        className='flex gap-20px py-16px px-34px items-center rd-10px bg-#F5F2EB'
-                        style={{ border: '1px solid #B29251'}}
+                        className='flex gap-20px py-16px px-34px items-center rd-10px bg-#ECF4F5'
+                        style={{ border: '1px solid #116E7F'}}
                         onClick={() => {
                             setCurrentDateRange('table');
                             setDateRange(tableDateRange);
                             setCalendarVisible(true);
                         }}
                     >
-                        <TaroImage src='../../assets/icons/date-brown.png' className='w-32px h-32px' />
-                        <TaroText className='text-24px c-#B29251'>
+                        <TaroImage src='../../assets/icons/date-green.png' className='w-32px h-32px' />
+                        <TaroText className='text-24px c-#116E7F'>
                             {dayjs(tableDateRange[0]).format('YYYY.MM.DD')}~{dayjs(tableDateRange[1]).format('YYYY.MM.DD')}
                         </TaroText>
                     </View>
@@ -532,7 +532,7 @@ function Index() {
                 }}
                 onClose={() => setMeasurementPeriodVisible(false)}
             />
-        </>
+        </View>
     );
 }
 

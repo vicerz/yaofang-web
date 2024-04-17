@@ -399,7 +399,7 @@ function Index() {
     return (
         <>
             <View className='flex flex-col pb-100px'>
-                <View className='relative bg-#116E7F flex flex-col items-center justify-center gap-20px py-30px pb-80px'>
+                <View className='relative bg-#B29251 flex flex-col items-center justify-center gap-20px py-30px pb-80px'>
                     <View
                         className='w-380px flex items-center justify-center gap-10px bg-#148599 c-white p-5px rd-full'
                         onClick={() => setDatePickerVisible(true)}
