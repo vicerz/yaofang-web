@@ -84,6 +84,14 @@ function Index() {
                 fill: '#EC6400',
             },
         },
+        axes: [
+            {
+                label: {
+                    space: 0,
+                    inside: true,
+                }
+            }
+        ],
         tooltip: {
             trigger: 'click' as 'hover'|'click'|'none',
             mark: {
@@ -96,6 +104,7 @@ function Index() {
             top: 0,
             left: 0,
             right: 0,
+            bottom: 10,
         },
         data: {
             values: [

@@ -401,7 +401,7 @@ function Index() {
             <View className='flex flex-col pb-100px'>
                 <View className='relative bg-#B29251 flex flex-col items-center justify-center gap-20px py-30px pb-80px'>
                     <View
-                        className='w-380px flex items-center justify-center gap-10px bg-#148599 c-white p-5px rd-full'
+                        className='w-380px flex items-center justify-center gap-10px bg-#F0BE5A c-white p-5px rd-full'
                         onClick={() => setDatePickerVisible(true)}
                     >
                         <TaroImage src='../../assets/icons/date-white.png' className='w-32px h-32px' />
