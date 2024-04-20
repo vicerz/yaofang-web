@@ -121,7 +121,7 @@ function Index() {
                     style: {
                         cornerRadius: 500,
                         roundCap: false,
-                        fill: '#148599'
+                        fill: '#F0BE5A'
                     }
                 }
             },
