@@ -42,6 +42,14 @@ const CheckInMutationDocument = graphql(`
     }
 `);
 
+const UpdateCheckInMutationDocument = graphql(`
+    mutation UpdateCheckInMutation($id: uuid!, $object: check_ins_set_input!) {
+        update_check_ins_by_pk(pk_columns: {id: $id}, _set: $object) {
+            id
+        }
+    }
+`);
+
 const UpdateUserCustomMutationDocument = graphql(`
     mutation UpdateUserCustomMutation($id: String!, $object: users_set_input!) {
         update_users_by_pk(pk_columns: {id: $id}, _set: $object) {
@@ -61,6 +69,7 @@ function Index() {
     });
 
     const [{ data: checkInData }, checkIn] = useMutation(CheckInMutationDocument);
+    const [{ data: updateCheckInData }, updateCheckIn] = useMutation(UpdateCheckInMutationDocument);
     const [{ data: updateUserData }, updateUser] = useMutation(UpdateUserCustomMutationDocument);
 
     const handleCheckIn = async () => {
@@ -93,16 +102,19 @@ function Index() {
     }, [data]);
 
     // 判断最后一次签到是否是昨天
-    const isYesterdayCheckIn = () => {
+    const isYesterdayCheckIn = useCallback(() => {
         if (!data?.check_ins[0]?.check_in_date) {
             return false;
         }
         return dayjs().subtract(1, 'day').isSame(dayjs(data?.check_ins[0]?.check_in_date), 'day');
-    };
+    }, [data]);
 
     // 判断是否满足首签
     const isFirstCheckIn = useMemo(() => {
-        return !data?.check_ins[0].is_continuation;
+        if (!data?.check_ins.length) {
+            return true;
+        }
+        return data.check_ins[0].consecutive_days < data.check_in_settings[0].inaugural;
     }, [data]);
 
     // 获取前一天的连续签到天数
@@ -125,66 +137,43 @@ function Index() {
         }
     }, [data]);
 
+    // 获取剩余签到天数
+    const getRemainingDays = useMemo(() => {
+        if (!data?.check_ins[0]?.check_in_date) {
+            return 0;
+        }
+        return (getYesterdayConsecutiveDays - data?.check_in_settings[0]?.inaugural) % data?.check_in_settings[0]?.following;
+    }, [data, getYesterdayConsecutiveDays]);
+
     const allowedReceive = () => {
-        if (data?.check_ins[0].received) {
+        if (data?.check_ins[0]?.received || dayjs(data?.check_ins[0]?.check_in_date).isBefore(dayjs(), 'day')){
             return false;
         }
-        if (data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
+        if (getYesterdayConsecutiveDays === data?.check_in_settings[0]?.inaugural) {
             return true;
+        } else {
+            return getRemainingDays === 0;
         }
-        if (data?.check_ins[0]?.consecutive_days === data?.check_in_settings[0]?.following) {
-            return true;
-        }
-        return false;
     };
 
     const handleReceiveCoupon = async () => {
         // 领取福利券后，更新用户信息，标记首次连续签到已完成，重置连续签到天数
         const userCheckInData = data?.check_ins[0];
         // 领取福利券
-        await checkIn({
+        await updateCheckIn({
+            id: userCheckInData?.id,
             object: {
-                check_in_date: dayjs().format('YYYY-MM-DD'),
-                consecutive_days: 0,
-                is_continuation: true,
                 received: true,
             },
         });
-        if ((userInfo?.custom_data as Record<string, unknown>)?.firstConsecutiveCompleted) {
-            if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.following) {
-                await updateUser({
-                    id: userInfo!.sub,
-                    object: {
-                        custom_data: {
-                            ...userInfo?.custom_data || {},
-                            firstConsecutiveCompleted: false,
-                        },
-                    },
-                });
-                window.location.href = data?.check_in_settings[0]?.following_url || '';
-            }
-        } else {
-            if (userCheckInData?.consecutive_days === data?.check_in_settings[0]?.inaugural) {
-                await updateUser({
-                    id: userInfo!.sub,
-                    object: {
-                        custom_data: {
-                            ...userInfo?.custom_data || {},
-                            firstConsecutiveCompleted: true,
-                        },
-                    },
-                });
-                Taro.showLoading({
-                    title: '正在跳转...'
-                });
-                setUserInfo(await fetchUserInfo());
-                window.location.href = data?.check_in_settings[0]?.inaugural_url || '';
-                Taro.hideLoading();
-            }
-        }
+        Taro.showLoading({
+            title: '正在跳转...'
+        });
+        window.location.href = data?.check_in_settings[0]?.inaugural_url || '';
+        Taro.hideLoading();
     };
 
-    const generateCheckInList = () => {
+    /* const generateCheckInList = () => {
         // 生成签到列表，最多显示7天，最后一天需要显示福利券图标
         // 如果未完成首次签到，签到列表长度是inaugural，否则是following
         // 签到图标分为三种状态：未签到、已签到、不可领取福利券、可领取福利券
@@ -205,7 +194,7 @@ function Index() {
             list.push({type: 'coupon'});
         }
         return list;
-    };
+    }; */
 
     useEffect(() => {
         if (checkInData) {
@@ -248,19 +237,23 @@ function Index() {
                         }}
                     >
                         <View className='flex items-center gap-20px'>
-                            <TaroText className='text-30px fw-600 color-black'>已连续签到 {getYesterdayConsecutiveDays} 天</TaroText>
+                            {getYesterdayConsecutiveDays === 0 ? (
+                                <TaroText className='text-30px fw-600 color-black'>您今天还没有签到</TaroText>
+                            ) : (
+                                <TaroText className='text-30px fw-600 color-black'>已连续签到 {getYesterdayConsecutiveDays} 天</TaroText>
+                            )}
                             {allowedReceive() && (
                                 <View
                                     className='px-16px py-4px bg-primary rd-8px text-22px c-white'
                                     onClick={handleReceiveCoupon}
                                 >
-                                领取福利券
+                                    领取福利券
                                 </View>
                             )}
                         </View>
                         <View className='flex items-center justify-between'>
                             <View className='flex flex-col gap-10px'>
-                                <View className='flex gap-10px'>
+                                {/* <View className='flex gap-10px'>
                                     {generateCheckInList().map((item, index) => (
                                         <TaroImage
                                             key={index}
@@ -268,14 +261,14 @@ function Index() {
                                             className='w-40px h-40px'
                                         />
                                     ))}
-                                </View>
+                                </View> */}
                                 <TaroText className='text-24px color-primary'>
-                                    {isFirstCheckIn &&  '首次'}
-                                    连续签到{
+                                    {isFirstCheckIn ? '首次' : '再'}
+                                    连续签到 {
                                         isFirstCheckIn
                                             ? data?.check_in_settings[0]?.inaugural
-                                            : data?.check_in_settings[0]?.following
-                                    }天可领取福利券...
+                                            : getRemainingDays <= 0 ? data?.check_in_settings[0]?.following : getRemainingDays
+                                    } 天可领取福利券...
                                 </TaroText>
                             </View>
                             {isShowCheckIn ? (
