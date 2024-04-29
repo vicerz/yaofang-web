@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import VConsole from 'vconsole';
+
 import 'uno.css';
 
 import UrqlProvider from './urql/provider';
@@ -17,6 +19,13 @@ function App(props) {
         if (isIOS) {
             // window.history.pushState({}, "title", "");
             window.history.scrollRestoration ='manual';
+        }
+
+        const enableVConsole = window.location.search.includes('vn');
+        if (enableVConsole) {
+            const vConsole = new VConsole();
+
+            vConsole.show();
         }
     });
 
